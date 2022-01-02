@@ -1,0 +1,73 @@
+{
+  "name": "budget-qsj",
+  "version": "1.0.0",
+  "description": "Calculate budget for wedding or events",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest",
+    "locales": "rm -rf ./dist/locales && ncp ./public/locales ./dist/locales",
+    "start": "npm run locales && webpack serve --config webpack.config.dev.ts --history-api-fallback",
+    "build": "webpack --config webpack.config.ts && npm run locales"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/natar10/trivia-rm.git"
+  },
+  "author": "NR",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/natar10/trivia-rm/issues"
+  },
+  "homepage": "https://github.com/natar10/trivia-rm#readme",
+  "dependencies": {
+    "@aws-amplify/ui-react": "^1.2.26",
+    "@reach/router": "^1.3.4",
+    "@testing-library/user-event": "^13.5.0",
+    "aws-amplify": "^4.3.11",
+    "axios": "^0.24.0",
+    "i18next": "^21.6.4",
+    "i18next-browser-languagedetector": "^6.1.2",
+    "i18next-http-backend": "^1.3.1",
+    "ncp": "^2.0.0",
+    "ramda": "^0.27.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-error-boundary": "^3.1.4",
+    "react-hook-form": "^7.22.5",
+    "react-i18next": "^11.15.3",
+    "react-loading-overlay-ts": "^1.0.4",
+    "react-select": "^5.2.1",
+    "styled-components": "^5.3.3"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.1",
+    "@types/mini-css-extract-plugin": "^2.4.0",
+    "@types/reach__router": "^1.3.10",
+    "@types/react-dom": "^17.0.11",
+    "autoprefixer": "^10.4.1",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.5.1",
+    "css-minimizer-webpack-plugin": "^3.3.1",
+    "exports-loader": "^3.1.0",
+    "fork-ts-checker-webpack-plugin": "^6.5.0",
+    "html-loader": "^3.0.1",
+    "html-webpack-plugin": "^5.5.0",
+    "jest": "^27.4.5",
+    "mini-css-extract-plugin": "^2.4.5",
+    "msw": "^0.36.3",
+    "node-sass": "^7.0.1",
+    "postcss": "^8.4.5",
+    "postcss-loader": "^6.2.1",
+    "sass": "^1.45.1",
+    "sass-loader": "^12.4.0",
+    "style-loader": "^3.3.1",
+    "terser-webpack-plugin": "^5.3.0",
+    "ts-jest": "^27.1.2",
+    "ts-loader": "^9.2.6",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.7.2"
+  }
+}
