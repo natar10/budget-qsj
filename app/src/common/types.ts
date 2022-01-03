@@ -1,3 +1,4 @@
+import { Asset, ContentfulClientApi } from "contentful";
 import { ReactNode } from "react";
 
 export type LoadingStatus = "LOADING" | "ERROR" | "LOADED";
@@ -7,6 +8,7 @@ export type ContextState = {
   userData: UserData | null;
   total: number;
   selectedItems: string[];
+  contentfulClient: ContentfulClientApi | null;
   setData?: (userData: UserData) => void;
   setTotal?: (value: number) => void;
   selectItems?: (item: string) => void;
@@ -14,6 +16,7 @@ export type ContextState = {
 
 export interface Props {
   path: string;
+  exact?: boolean;
 }
 
 export interface UserData {
@@ -27,4 +30,14 @@ export interface UserData {
 
 export interface PropsNode {
   children: ReactNode;
+}
+
+export interface Menu {
+  id: string;
+  title: string;
+  description: string;
+  photosUrl: string;
+  value: number;
+  mainPhoto: Asset;
+  additionalPhotos: Asset[];
 }

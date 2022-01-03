@@ -16,13 +16,13 @@ const App = () => {
       <SideMenu />
       <AppContextProvider>
         <Router>
-          <Home path="/" />
-          <Menu path="/menu" />
-          <MenuOption path="/menu/:id" />
-          <Decoration path="decoration" />
-          <Decoration path="decoration/:id" />
-          <Services path="/services" />
-          <Reception path="/reception" />
+          <Home exact path="/" />
+          <Menu exact path="/menu" />
+          <MenuOption exact path="/menu/:menuId" />
+          <Decoration exact path="decoration" />
+          <Decoration exact path="decoration/:id" />
+          <Services exact path="/services" />
+          <Reception exact path="/reception" />
         </Router>
       </AppContextProvider>
     </Suspense>
