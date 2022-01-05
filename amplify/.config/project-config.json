@@ -1,0 +1,18 @@
+{
+  "projectName": "budgetqsj",
+  "version": "3.0",
+  "frontend": "javascript",
+  "javascript": {
+    "framework": "react",
+    "config": {
+      "SourceDir": "app/src",
+      "DistributionDir": "app/dist",
+      "BuildCommand": "npm --prefix ./app run build",
+      "StartCommand": "npm --prefix ./app run start",
+      "ServerlessContainers": false
+    }
+  },
+  "providers": [
+    "awscloudformation"
+  ]
+}
