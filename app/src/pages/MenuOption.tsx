@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { isItemSelected } from "../common/functions";
 import { Menu, Props } from "../common/types";
 import { useAppContext } from "../context/AppContext";
 import UserDataController from "../components/UserDataController";
-import { getMenu } from "../services/contentful";
+import { menus } from "../services/contentful";
 import { useParams } from "@reach/router";
 
 type Params = {
@@ -10,22 +11,22 @@ type Params = {
 };
 
 const MenuOption: React.FC<Props> = (props) => {
-  const { setTotal, selectItems, selectedItems, contentfulClient, userData } =
+  const { selectUniqueItems, selectedUniqueItems, contentfulClient, userData } =
     useAppContext();
   const [menu, setMenu] = useState<Menu | null>(null);
   const { menuId } = useParams<Params>();
 
   useEffect(() => {
     if (!contentfulClient || !menuId) return;
-    getMenu(contentfulClient, menuId)
+    menus
+      .getMenu(contentfulClient, menuId)
       .then((menuItem: Menu) => setMenu(menuItem))
       .catch((e) => console.log(e));
   }, [menuId, userData]);
 
   const selectMenu = (value: number, item: string) => {
-    if (!setTotal || !selectItems) return;
-    setTotal(value);
-    selectItems(item);
+    if (!selectUniqueItems) return;
+    selectUniqueItems({ type: "menu", value, item });
   };
 
   return (
@@ -34,7 +35,7 @@ const MenuOption: React.FC<Props> = (props) => {
         <>
           <h1>{menu.title}</h1>
           <p>This is a menu option</p>
-          {selectedItems.includes(menu.id) ? (
+          {isItemSelected(menu.id, selectedUniqueItems) ? (
             <>This menu is selected</>
           ) : (
             <button onClick={() => selectMenu(30, menu.id)}>

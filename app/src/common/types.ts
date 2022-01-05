@@ -7,16 +7,25 @@ export type ContextState = {
   status: "LOADING" | "ERROR" | "LOADED";
   userData: UserData | null;
   total: number;
-  selectedItems: string[];
+  selectedUniqueItems: SelectedItem[];
+  selectedVariousItems: SelectedItem[];
   contentfulClient: ContentfulClientApi | null;
   setData?: (userData: UserData) => void;
   setTotal?: (value: number) => void;
-  selectItems?: (item: string) => void;
+  selectUniqueItems?: (item: SelectedItem) => void;
+  selectVariousItems?: (item: SelectedItem) => void;
 };
 
 export interface Props {
   path: string;
   exact?: boolean;
+}
+
+export type ContentType = "menu" | "service" | "decoration" | "reception";
+export interface SelectedItem {
+  item: string;
+  value: number;
+  type: ContentType;
 }
 
 export interface UserData {
@@ -33,6 +42,36 @@ export interface PropsNode {
 }
 
 export interface Menu {
+  id: string;
+  title: string;
+  description: string;
+  photosUrl: string;
+  value: number;
+  mainPhoto: Asset;
+  additionalPhotos: Asset[];
+}
+
+export interface Decoration {
+  id: string;
+  title: string;
+  description: string;
+  photosUrl: string;
+  value: number;
+  mainPhoto: Asset;
+  additionalPhotos: Asset[];
+}
+
+export interface Service {
+  id: string;
+  title: string;
+  description: string;
+  photosUrl: string;
+  value: number;
+  mainPhoto: Asset;
+  additionalPhotos: Asset[];
+}
+
+export interface Reception {
   id: string;
   title: string;
   description: string;
