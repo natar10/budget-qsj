@@ -14,7 +14,6 @@ import SideMenu from "./SideMenu";
 const App = () => {
   return (
     <Suspense fallback="loading">
-      <SideMenu />
       <AppContextProvider>
         <Router>
           <Home exact path="/" />

@@ -11,16 +11,23 @@ module.exports = {
     publicPath: "/",
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
+    extensions: [".tsx", ".ts", ".js", ".mjs"],
+    fallback: { crypto: false },
   },
   mode: "development",
   module: {
     rules: [
       {
-        test: /\.(ts|tsx|js)$/,
+        test: /\.(ts|tsx|js|jsx)$/,
         exclude: /node_modules/,
         use: {
           loader: "ts-loader",
+        },
+      },
+      {
+        test: /\.m?js/,
+        resolve: {
+          fullySpecified: false,
         },
       },
       {
@@ -43,10 +50,6 @@ module.exports = {
             loader: "sass-loader", // compiles Sass to CSS
           },
         ],
-      },
-      {
-        test: /\.json$/,
-        use: [{ loader: "json" }],
       },
     ],
   },

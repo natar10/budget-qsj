@@ -1,9 +1,10 @@
 import React from "react";
 import { AppContextProvider, useAppContext } from "../context/AppContext";
-import { Props, UserData } from "../common/types";
+import { UserData } from "../common/types";
 import { Link } from "@reach/router";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { Row, Col, Form, Button } from "react-bootstrap";
 
 const Home: React.FC = () => {
   const { t } = useTranslation("es");
@@ -23,65 +24,90 @@ const Home: React.FC = () => {
 
   return (
     <AppContextProvider>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input
-          type="text"
-          {...register("eventType", { required: true })}
-          name="eventType"
-          placeholder="eventType"
-        />
-        {errors.eventType && <span>This field is required</span>}
-        <br />
-        <br />
-        <input
-          type="text"
-          {...register("name", { required: true })}
-          name="name"
-          placeholder="name"
-        />
-        {errors.name && <span>This field is required</span>}
-        <br />
-        <br />
-        <input
-          type="text"
-          {...register("email", { required: true })}
-          name="email"
-          placeholder="email"
-        />
-        {errors.email && <span>This field is required</span>}
-        <br />
-        <br />
-        <input
-          type="text"
-          {...register("phone", { required: true })}
-          name="phone"
-          placeholder="phone"
-        />
-        {errors.phone && <span>This field is required</span>}
-        <br />
-        <br />
-        <input
-          type="text"
-          {...register("eventDate", { required: true })}
-          name="eventDate"
-          placeholder="eventDate"
-        />
-        {errors.eventDate && <span>This field is required</span>}
-        <br />
-        <br />
-        <input
-          type="text"
-          {...register("quantity", { required: true })}
-          name="quantity"
-          placeholder="quantity"
-        />
-        {errors.quantity && <span>This field is required</span>}
-        <br />
-        <br />
+      <Row>
+        <Col className="introduction" lg={8}>
+          <h2>{t("get_budget")}</h2>
+          <h4>{t("find_options")}</h4>
+        </Col>
+        <Col>
+          <Form onSubmit={handleSubmit(onSubmit)}>
+            <Form.Group className="mb-3">
+              <Form.Label>{t("eventType")}</Form.Label>
+              <Form.Control
+                type="text"
+                {...register("eventType", { required: true })}
+                name="eventType"
+              />
+              {errors.eventType && (
+                <span className="error">{t("required")}</span>
+              )}
+            </Form.Group>
 
-        <button>{t("quote")}</button>
-      </form>
-      <Link to="menu">Select menu</Link>
+            <Row>
+              <Col>
+                <Form.Group className="mb-3">
+                  <Form.Label>{t("eventDate")}</Form.Label>
+                  <Form.Control
+                    type="text"
+                    {...register("eventDate", { required: true })}
+                    name="eventDate"
+                  />
+                  {errors.eventDate && (
+                    <span className="error">{t("required")}</span>
+                  )}
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3">
+                  <Form.Label>{t("quantity")}</Form.Label>
+                  <Form.Control
+                    type="text"
+                    {...register("quantity", { required: true })}
+                    name="quantity"
+                  />
+                  {errors.quantity && (
+                    <span className="error">{t("required")}</span>
+                  )}
+                </Form.Group>
+              </Col>
+            </Row>
+
+            <Form.Group className="mb-3">
+              <Form.Label>{t("name")}</Form.Label>
+              <Form.Control
+                type="text"
+                {...register("name", { required: true })}
+                name="name"
+              />
+              {errors.name && <span className="error">{t("required")}</span>}
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>{t("email")}</Form.Label>
+              <Form.Control
+                type="email"
+                {...register("email", { required: true })}
+                name="email"
+              />
+              {errors.email && <span className="error">{t("required")}</span>}
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>{t("phone")}</Form.Label>
+              <Form.Control
+                type="text"
+                {...register("phone", { required: true })}
+                name="phone"
+              />
+              {errors.phone && <span className="error">{t("required")}</span>}
+            </Form.Group>
+
+            <Button type="submit" variant="light" size="lg">
+              {t("quote")}
+            </Button>
+          </Form>
+        </Col>
+      </Row>
     </AppContextProvider>
   );
 };

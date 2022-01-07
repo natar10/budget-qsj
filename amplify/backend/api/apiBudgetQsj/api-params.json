@@ -1,0 +1,35 @@
+{
+    "paths": [
+        {
+            "name": "/photos",
+            "lambdaFunction": "qsjBudgetPhotos",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/photos"
+        }
+    ],
+    "resourceName": "apiBudgetQsj",
+    "apiName": "apiBudgetQsj",
+    "functionArns": [
+        {
+            "lambdaFunction": "qsjBudgetPhotos"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-budgetqsj-dev-130519-authRole",
+        "unAuthRoleName": "amplify-budgetqsj-dev-130519-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "qsjBudgetPhotos",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

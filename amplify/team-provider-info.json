@@ -1,23 +1,29 @@
 {
-    "dev": {
-        "awscloudformation": {
-            "AuthRoleName": "amplify-budgetqsj-dev-130519-authRole",
-            "UnauthRoleArn": "arn:aws:iam::141517589033:role/amplify-budgetqsj-dev-130519-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::141517589033:role/amplify-budgetqsj-dev-130519-authRole",
-            "Region": "us-west-2",
-            "DeploymentBucketName": "amplify-budgetqsj-dev-130519-deployment",
-            "UnauthRoleName": "amplify-budgetqsj-dev-130519-unauthRole",
-            "StackName": "amplify-budgetqsj-dev-130519",
-            "StackId": "arn:aws:cloudformation:us-west-2:141517589033:stack/amplify-budgetqsj-dev-130519/0faa5030-699b-11ec-9fe2-020ef0b16619",
-            "AmplifyAppId": "d326252qas0e30"
-        },
-        "categories": {
-            "hosting": {
-                "amplifyhosting": {
-                    "appId": "d326252qas0e30",
-                    "type": "manual"
-                }
-            }
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-budgetqsj-dev-130519-authRole",
+      "UnauthRoleArn": "arn:aws:iam::141517589033:role/amplify-budgetqsj-dev-130519-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::141517589033:role/amplify-budgetqsj-dev-130519-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-budgetqsj-dev-130519-deployment",
+      "UnauthRoleName": "amplify-budgetqsj-dev-130519-unauthRole",
+      "StackName": "amplify-budgetqsj-dev-130519",
+      "StackId": "arn:aws:cloudformation:us-west-2:141517589033:stack/amplify-budgetqsj-dev-130519/0faa5030-699b-11ec-9fe2-020ef0b16619",
+      "AmplifyAppId": "d326252qas0e30"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d326252qas0e30",
+          "type": "manual"
         }
+      },
+      "function": {
+        "qsjBudgetPhotos": {
+          "deploymentBucketName": "amplify-budgetqsj-dev-130519-deployment",
+          "s3Key": "amplify-builds/qsjBudgetPhotos-745173556c3134463546-build.zip"
+        }
+      }
     }
+  }
 }

@@ -49,6 +49,20 @@ export interface Menu {
   value: number;
   mainPhoto: Asset;
   additionalPhotos: Asset[];
+  text?: string;
+  option1?: string;
+  option2?: string;
+  option3?: string;
+}
+
+export interface Additional {
+  id: string;
+  title: string;
+  description: string;
+  value: number;
+  text?: string;
+  text2?: string;
+  text3?: string;
 }
 
 export interface Decoration {
@@ -79,4 +93,13 @@ export interface Reception {
   value: number;
   mainPhoto: Asset;
   additionalPhotos: Asset[];
+}
+
+export interface GooglePhoto {
+  id: string;
+  productUrl: string;
+  baseUrl: string;
+}
+export interface GooglePhotoResponse {
+  mediaItems: GooglePhoto[];
 }
