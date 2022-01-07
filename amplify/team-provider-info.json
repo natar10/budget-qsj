@@ -21,7 +21,7 @@
       "function": {
         "qsjBudgetPhotos": {
           "deploymentBucketName": "amplify-budgetqsj-dev-130519-deployment",
-          "s3Key": "amplify-builds/qsjBudgetPhotos-745173556c3134463546-build.zip"
+          "s3Key": "amplify-builds/qsjBudgetPhotos-3369345a6f5746456667-build.zip"
         }
       }
     }

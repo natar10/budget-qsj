@@ -8,20 +8,20 @@ type Props = {
 };
 
 const MenuOption: React.FC<Props> = (props) => {
-  const [photos, setPhotos] = useState<GooglePhoto[]>([]);
+  const [photos, setPhotos] = useState<string[]>([]);
   console.log(props.albumId);
 
   useEffect(() => {
     getPhotos(props.albumId)
-      .then((photos: GooglePhoto[]) => setPhotos(photos))
+      .then((data: { photos: string[] }) => setPhotos(data.photos))
       .catch((e) => console.log(e));
   }, [props.albumId]);
 
   return (
     <Row>
-      {photos.map((photo) => (
-        <Col key={photo.id}>
-          <img src={photo.baseUrl} alt="Quinta San Joaquin" />
+      {photos.map((photo, index) => (
+        <Col className="imgMenus" xs={12} md={6} key={index}>
+          <img src={photo} alt="Quinta San Joaquin" />
         </Col>
       ))}
     </Row>

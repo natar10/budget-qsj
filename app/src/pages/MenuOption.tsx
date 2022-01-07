@@ -80,10 +80,18 @@ const MenuOption: React.FC<Props> = (props) => {
                 {t("see_photos")}
               </a>
 
-              {isItemSelected(menu.id, selectedUniqueItems) ? (
-                <h5>{t("selected")}</h5>
-              ) : (
-                <div className="d-grid gap-2">
+              <div className="d-grid gap-2">
+                {isItemSelected(menu.id, selectedUniqueItems) ? (
+                  <>
+                    <h3>{t("selected")}</h3>
+                    <Link
+                      to="/decoration"
+                      className="d-block btn btn-success btn-lg"
+                    >
+                      {t("continue_decoration")}
+                    </Link>
+                  </>
+                ) : (
                   <Button
                     className="d-block"
                     onClick={() => selectMenu(menu.value, menu.id)}
@@ -92,14 +100,14 @@ const MenuOption: React.FC<Props> = (props) => {
                   >
                     {t("select")}
                   </Button>
-                  <Link
-                    to="/menu"
-                    className="d-block btn btn-outline-secondary btn-lg"
-                  >
-                    {t("more_options")}
-                  </Link>
-                </div>
-              )}
+                )}
+                <Link
+                  to="/menu"
+                  className="d-block btn btn-outline-secondary btn-lg"
+                >
+                  {t("more_options")}
+                </Link>
+              </div>
             </Col>
           </Row>
           <h3 id="menu_options" className="mb-5 mt-3">

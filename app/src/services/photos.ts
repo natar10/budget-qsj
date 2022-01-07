@@ -1,10 +1,10 @@
 import axios from "axios";
 import { API } from "aws-amplify";
 
-import type { GooglePhoto, GooglePhotoResponse } from "../common/types";
-
 export const getPhotos = (album: string) => {
-  return API.get("apiBudgetQsj", "/photos", null)
+  console.log("album", album);
+  const t = "tester";
+  return API.get("apiBudgetQsj", `/photos/${album}`, null)
     .then((response) => {
       console.log("********response", response);
       return response;

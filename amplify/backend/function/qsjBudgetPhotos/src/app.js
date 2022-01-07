@@ -6,87 +6,98 @@ or in the "license" file accompanying this file. This file is distributed on an 
 See the License for the specific language governing permissions and limitations under the License.
 */
 
-
-
-
-var express = require('express')
-var bodyParser = require('body-parser')
-var awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
+const express = require("express");
+const bodyParser = require("body-parser");
+const awsServerlessExpressMiddleware = require("aws-serverless-express/middleware");
+const getPhotos = require("./getPhotos");
 
 // declare a new express app
-var app = express()
-app.use(bodyParser.json())
-app.use(awsServerlessExpressMiddleware.eventContext())
+const app = express();
+app.use(bodyParser.json());
+app.use(awsServerlessExpressMiddleware.eventContext());
 
 // Enable CORS for all methods
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*")
-  res.header("Access-Control-Allow-Headers", "*")
-  next()
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "*");
+  next();
 });
-
 
 /**********************
  * Example get method *
  **********************/
 
-app.get('/photos', function(req, res) {
+app.get("/photos", function (req, res) {
+  getPhotos()
+    .then((photos) => {
+      res.json({ photos });
+    })
+    .catch((e) => {
+      res.status(500);
+      res.send();
+    });
   // Add your code here
-  res.json({success: 'get call succeed!', url: req.url});
 });
 
-app.get('/photos/*', function(req, res) {
-  // Add your code here
-  res.json({success: 'get call succeed!', url: req.url});
-});
-
-/****************************
-* Example post method *
-****************************/
-
-app.post('/photos', function(req, res) {
-  // Add your code here
-  res.json({success: 'post call succeed!', url: req.url, body: req.body})
-});
-
-app.post('/photos/*', function(req, res) {
-  // Add your code here
-  res.json({success: 'post call succeed!', url: req.url, body: req.body})
-});
-
-/****************************
-* Example put method *
-****************************/
-
-app.put('/photos', function(req, res) {
-  // Add your code here
-  res.json({success: 'put call succeed!', url: req.url, body: req.body})
-});
-
-app.put('/photos/*', function(req, res) {
-  // Add your code here
-  res.json({success: 'put call succeed!', url: req.url, body: req.body})
+app.get("/photos/:albumId", function (req, res) {
+  const { albumId } = req.params;
+  getPhotos(albumId)
+    .then((photos) => {
+      res.json({ photos });
+    })
+    .catch((e) => {
+      res.status(500);
+      res.send();
+    });
 });
 
 /****************************
-* Example delete method *
-****************************/
+ * Example post method *
+ ****************************/
 
-app.delete('/photos', function(req, res) {
+app.post("/photos", function (req, res) {
   // Add your code here
-  res.json({success: 'delete call succeed!', url: req.url});
+  res.json({ success: "post call succeed!", url: req.url, body: req.body });
 });
 
-app.delete('/photos/*', function(req, res) {
+app.post("/photos/*", function (req, res) {
   // Add your code here
-  res.json({success: 'delete call succeed!', url: req.url});
+  res.json({ success: "post call succeed!", url: req.url, body: req.body });
 });
 
-app.listen(3000, function() {
-    console.log("App started")
+/****************************
+ * Example put method *
+ ****************************/
+
+app.put("/photos", function (req, res) {
+  // Add your code here
+  res.json({ success: "put call succeed!", url: req.url, body: req.body });
+});
+
+app.put("/photos/*", function (req, res) {
+  // Add your code here
+  res.json({ success: "put call succeed!", url: req.url, body: req.body });
+});
+
+/****************************
+ * Example delete method *
+ ****************************/
+
+app.delete("/photos", function (req, res) {
+  // Add your code here
+  res.json({ success: "delete call succeed!", url: req.url });
+});
+
+app.delete("/photos/*", function (req, res) {
+  // Add your code here
+  res.json({ success: "delete call succeed!", url: req.url });
+});
+
+app.listen(3000, function () {
+  console.log("App started");
 });
 
 // Export the app object. When executing the application local this does nothing. However,
 // to port it to AWS Lambda we will create a wrapper around that will load the app from
 // this file
-module.exports = app
+module.exports = app;
