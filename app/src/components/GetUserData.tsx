@@ -1,10 +1,11 @@
 import React from "react";
 import { AppContextProvider, useAppContext } from "../context/AppContext";
 import { UserData } from "../common/types";
-import { Link } from "@reach/router";
+import DatePicker from "react-datepicker";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Row, Col, Form, Button } from "react-bootstrap";
+import "react-datepicker/dist/react-datepicker.css";
 
 const Home: React.FC = () => {
   const { t } = useTranslation("es");
@@ -12,6 +13,8 @@ const Home: React.FC = () => {
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm();
 
@@ -22,49 +25,71 @@ const Home: React.FC = () => {
     }
   };
 
+  const setEventDate = (date: Date | null) => {
+    setValue("eventDate", date);
+  };
+
+  const cantQuantity = Array.from(Array(52).keys());
+
   return (
     <AppContextProvider>
       <Row>
         <Col className="introduction" lg={8}>
           <h2>{t("get_budget")}</h2>
           <h4>{t("find_options")}</h4>
+          <hr />
+          <h3>{t("fill_form")}</h3>
         </Col>
         <Col>
           <Form onSubmit={handleSubmit(onSubmit)}>
             <Form.Group className="mb-3">
               <Form.Label>{t("eventType")}</Form.Label>
-              <Form.Control
-                type="text"
+              <Form.Select
                 {...register("eventType", { required: true })}
                 name="eventType"
-              />
+              >
+                <option>--Selecciona--</option>
+                <option value="Boda Religiosa">Boda Religiosa</option>
+                <option value="Boda Civil">Boda Civil</option>
+                <option value="Bautizo">Bautizo</option>
+                <option value="Quince años">Quince años</option>
+                <option value="Cumpleaños">Cumpleaños</option>
+                <option value="Otros">Otros</option>
+              </Form.Select>
               {errors.eventType && (
                 <span className="error">{t("required")}</span>
               )}
             </Form.Group>
 
             <Row>
-              <Col>
+              <Col lg={6}>
                 <Form.Group className="mb-3">
                   <Form.Label>{t("eventDate")}</Form.Label>
-                  <Form.Control
-                    type="text"
-                    {...register("eventDate", { required: true })}
-                    name="eventDate"
+                  <DatePicker
+                    className="form-control"
+                    selected={watch("eventDate") || new Date()}
+                    onChange={(date) => setEventDate(date)}
                   />
                   {errors.eventDate && (
                     <span className="error">{t("required")}</span>
                   )}
                 </Form.Group>
               </Col>
-              <Col>
+              <Col lg={6}>
                 <Form.Group className="mb-3">
                   <Form.Label>{t("quantity")}</Form.Label>
-                  <Form.Control
-                    type="text"
+
+                  <Form.Select
                     {...register("quantity", { required: true })}
                     name="quantity"
-                  />
+                  >
+                    <option>{t("selector")}</option>
+                    {cantQuantity.slice(3, -1).map((quantity) => (
+                      <option key={quantity} value={quantity * 10}>
+                        {quantity * 10}
+                      </option>
+                    ))}
+                  </Form.Select>
                   {errors.quantity && (
                     <span className="error">{t("required")}</span>
                   )}
@@ -76,6 +101,7 @@ const Home: React.FC = () => {
               <Form.Label>{t("name")}</Form.Label>
               <Form.Control
                 type="text"
+                placeholder={t("name")}
                 {...register("name", { required: true })}
                 name="name"
               />
@@ -86,6 +112,7 @@ const Home: React.FC = () => {
               <Form.Label>{t("email")}</Form.Label>
               <Form.Control
                 type="email"
+                placeholder="example@test.com"
                 {...register("email", { required: true })}
                 name="email"
               />
@@ -96,6 +123,7 @@ const Home: React.FC = () => {
               <Form.Label>{t("phone")}</Form.Label>
               <Form.Control
                 type="text"
+                placeholder="0987234234"
                 {...register("phone", { required: true })}
                 name="phone"
               />

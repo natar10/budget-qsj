@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { isItemSelected } from "../common/functions";
-import { Menu, Props, Additional } from "../common/types";
+import { Menu, Props, Additional, SelectedItem } from "../common/types";
 import { useAppContext } from "../context/AppContext";
 import UserDataController from "../components/UserDataController";
 import { menus } from "../services/contentful";
@@ -18,6 +18,7 @@ const MenuOption: React.FC<Props> = (props) => {
   const { t } = useTranslation("es");
   const { selectUniqueItems, selectedUniqueItems, contentfulClient, userData } =
     useAppContext();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [menu, setMenu] = useState<Menu | null>(null);
   const [description, setDescription] = useState<Additional | undefined>(
     undefined
@@ -31,110 +32,114 @@ const MenuOption: React.FC<Props> = (props) => {
       .then((menuItem: Menu) => setMenu(menuItem))
       .then(() => menus.getMenu(contentfulClient, "2VkJfNDy2gTZaAG1wLvxF0"))
       .then((descriptionItem: Menu) => setDescription(descriptionItem))
-      .catch((e) => console.log(e));
+      .catch((e) => console.log(e))
+      .finally(() => setIsLoading(false));
   }, [menuId, userData]);
 
-  const selectMenu = (value: number, item: string) => {
+  const selectMenu = (product: Menu) => {
     if (!selectUniqueItems) return;
-    selectUniqueItems({ type: "menu", value, item });
+    selectUniqueItems({ type: "menu", product });
   };
 
   return (
-    <UserDataController>
-      {menu ? (
-        <>
-          <h2 className="mb-4">{menu.title}</h2>
-          <Row>
-            <Col md={8}>
-              <div>
-                {description?.text && description?.text2 && description?.text3 && (
-                  <>
-                    <h3 className="mb-4">{description.title}</h3>
-                    <Row>
-                      <Col>
-                        <ReactMarkdown>{description.text}</ReactMarkdown>
-                      </Col>
-                      <Col>
-                        <ReactMarkdown>{description.text2}</ReactMarkdown>
-                      </Col>
-                      <Col>
-                        <ReactMarkdown>{description.text3}</ReactMarkdown>
-                      </Col>
-                    </Row>
-                  </>
-                )}
-              </div>
-            </Col>
-            <Col className="text-center">
-              <h1>${menu.value}</h1>
-              <a
-                href="#menu_options"
-                className="m-2 btn btn-outline-success btn-lg m-2"
-              >
-                {t("see_menus")}
-              </a>
-              <a
-                href="#menu_photos"
-                className="m-2 btn btn-outline-primary btn-lg m-2"
-              >
-                {t("see_photos")}
-              </a>
+    <div className={userData ? "general" : "home"}>
+      <UserDataController>
+        {isLoading && <h2 className="mt-3">{t("loading")}</h2>}
+        {menu && (
+          <>
+            <h2 className="mb-4">{menu.title}</h2>
+            <Row>
+              <Col md={8}>
+                <div>
+                  {description?.text &&
+                    description?.text2 &&
+                    description?.text3 && (
+                      <>
+                        <h3 className="mb-4">{description.title}</h3>
+                        <Row>
+                          <Col>
+                            <ReactMarkdown>{description.text}</ReactMarkdown>
+                          </Col>
+                          <Col>
+                            <ReactMarkdown>{description.text2}</ReactMarkdown>
+                          </Col>
+                          <Col>
+                            <ReactMarkdown>{description.text3}</ReactMarkdown>
+                          </Col>
+                        </Row>
+                      </>
+                    )}
+                </div>
+              </Col>
+              <Col className="text-center">
+                <h1>${menu.value}</h1>
+                <a
+                  href="#menu_options"
+                  className="m-2 btn btn-outline-success btn-lg m-2"
+                >
+                  {t("see_menus")}
+                </a>
+                <a
+                  href="#menu_photos"
+                  className="m-2 btn btn-outline-primary btn-lg m-2"
+                >
+                  {t("see_photos")}
+                </a>
 
-              <div className="d-grid gap-2">
-                {isItemSelected(menu.id, selectedUniqueItems) ? (
-                  <>
+                <div className="d-grid gap-2">
+                  {!isItemSelected(menu.id, selectedUniqueItems) ? (
+                    <Button
+                      className="d-block"
+                      onClick={() => selectMenu(menu)}
+                      variant="success"
+                      size="lg"
+                    >
+                      {t("select")}
+                    </Button>
+                  ) : (
                     <h3>{t("selected")}</h3>
+                  )}
+                  {isItemSelected(menu.id, selectedUniqueItems) && (
                     <Link
                       to="/decoration"
-                      className="d-block btn btn-success btn-lg"
+                      className="d-block btn btn-warning btn-lg"
                     >
                       {t("continue_decoration")}
                     </Link>
-                  </>
-                ) : (
-                  <Button
-                    className="d-block"
-                    onClick={() => selectMenu(menu.value, menu.id)}
-                    variant="success"
-                    size="lg"
+                  )}
+                  <Link
+                    to="/menu"
+                    className="d-block btn btn-outline-secondary btn-lg"
                   >
-                    {t("select")}
-                  </Button>
-                )}
-                <Link
-                  to="/menu"
-                  className="d-block btn btn-outline-secondary btn-lg"
-                >
-                  {t("more_options")}
-                </Link>
-              </div>
-            </Col>
-          </Row>
-          <h3 id="menu_options" className="mb-5 mt-3">
-            {t("menu_options")}
-          </h3>
-          {menu.option1 && menu.option2 && menu.option3 && (
-            <Row>
-              <Col className="option">
-                <ReactMarkdown>{menu.option1}</ReactMarkdown>
-              </Col>
-              <Col className="option">
-                <ReactMarkdown>{menu.option2}</ReactMarkdown>
-              </Col>
-              <Col className="option">
-                <ReactMarkdown>{menu.option3}</ReactMarkdown>
+                    {t("more_options")}
+                  </Link>
+                </div>
               </Col>
             </Row>
-          )}
-          <h3 id="menu_photos" className="mb-5 mt-3">
-            {t("menu_photos")}
-          </h3>
-          <GooglePhotos albumId={menu.photosUrl} />
-        </>
-      ) : (
-        <h2>Loading...</h2>
-      )}
-    </UserDataController>
+            <h3 id="menu_options" className="mb-5 mt-3">
+              {t("menu_options")}
+            </h3>
+            {menu.option1 && menu.option2 && menu.option3 && (
+              <Row>
+                <Col className="option">
+                  <ReactMarkdown>{menu.option1}</ReactMarkdown>
+                </Col>
+                <Col className="option">
+                  <ReactMarkdown>{menu.option2}</ReactMarkdown>
+                </Col>
+                <Col className="option">
+                  <ReactMarkdown>{menu.option3}</ReactMarkdown>
+                </Col>
+              </Row>
+            )}
+            <h3 id="menu_photos" className="mb-5 mt-3">
+              {t("menu_photos")}
+            </h3>
+            <GooglePhotos albumId={menu.photosUrl} />
+          </>
+        )}
+      </UserDataController>
+    </div>
   );
 };
 

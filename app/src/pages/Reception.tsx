@@ -6,55 +6,85 @@ import { receptions } from "../services/contentful";
 import { isItemSelected } from "../common/functions";
 import { useTranslation } from "react-i18next";
 import { Col, Row, Button } from "react-bootstrap";
+import { Link } from "@reach/router";
 
 const Reception: React.FC<Props> = (props) => {
   const { t } = useTranslation("es");
   const [allReceptions, setAllReceptions] = useState<Reception[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const {
     contentfulClient,
     userData,
     selectedVariousItems,
     selectVariousItems,
+    removeVariousItems,
   } = useAppContext();
+
   useEffect(() => {
     if (!contentfulClient) return;
     receptions
       .getReceptions(contentfulClient, "reception")
       .then((allReceptions) => setAllReceptions(allReceptions))
-      .catch((e) => console.log(e));
+      .catch((e) => console.log(e))
+      .finally(() => setIsLoading(false));
   }, [userData]);
-  const selectReception = (value: number, item: string) => {
+
+  const selectReception = (product: Reception) => {
     if (!selectVariousItems) return;
-    selectVariousItems({ type: "reception", value, item });
+    selectVariousItems({ type: "reception", product });
   };
+
+  const removeReception = (product: Reception) => {
+    if (!removeVariousItems) return;
+    removeVariousItems({ type: "reception", product });
+  };
+
   return (
-    <UserDataController>
-      <h1>{t("reception")}</h1>
-      <Row>
-        {allReceptions.map((reception) => (
-          <Col className="services" key={reception.id}>
-            <h3>{reception.title}</h3>
-            {isItemSelected(reception.id, selectedVariousItems) && (
-              <p>{t("selected")}</p>
-            )}
-            <p>{reception.description}</p>
-            <img
-              width="90%"
-              src={reception.mainPhoto.fields.file.url}
-              alt={reception.title}
-            />
-            <div className="value">${reception.value}</div>
-            <Button
-              variant="success"
-              size="lg"
-              onClick={() => selectReception(reception.value, reception.id)}
-            >
-              {t("select")}
-            </Button>
-          </Col>
-        ))}
-      </Row>
-    </UserDataController>
+    <div className={userData ? "general" : "home"}>
+      <UserDataController>
+        <h1>{t("reception")}</h1>
+        {isLoading && <h2 className="mt-3">{t("loading")}</h2>}
+        <Row>
+          {allReceptions.map((reception) => (
+            <Col className="services" key={reception.id}>
+              <h3>{reception.title}</h3>
+              <p>{reception.description}</p>
+              <img
+                width="90%"
+                src={reception.mainPhoto.fields.file.url}
+                alt={reception.title}
+              />
+              <div className="value">${reception.value}</div>
+              {isItemSelected(reception.id, selectedVariousItems) && (
+                <h4 className="mt-3">{t("selected")}</h4>
+              )}
+              <Button
+                variant={
+                  isItemSelected(reception.id, selectedVariousItems)
+                    ? "danger"
+                    : "success"
+                }
+                size="lg"
+                onClick={() =>
+                  isItemSelected(reception.id, selectedVariousItems)
+                    ? removeReception(reception)
+                    : selectReception(reception)
+                }
+              >
+                {isItemSelected(reception.id, selectedVariousItems)
+                  ? t("remove")
+                  : t("select")}
+              </Button>
+            </Col>
+          ))}
+        </Row>
+        <div className="text-center mt-4">
+          <Link to="/resume" className="d-block btn btn-warning btn-lg">
+            {t("continue_resume")}
+          </Link>
+        </div>
+      </UserDataController>
+    </div>
   );
 };
 

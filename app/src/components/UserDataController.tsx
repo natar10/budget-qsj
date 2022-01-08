@@ -1,10 +1,11 @@
 import React from "react";
 import { useAppContext } from "../context/AppContext";
-import { PropsNode, UserData } from "../common/types";
+import { PropsNode } from "../common/types";
 import GetUserData from "./GetUserData";
 import { Container } from "react-bootstrap";
 import MenuBar from "./MenuBar";
 import { useTranslation } from "react-i18next";
+import { Link } from "@reach/router";
 
 const UserDataController: React.FC<PropsNode> = ({ children }) => {
   const { t } = useTranslation("es");
@@ -16,9 +17,14 @@ const UserDataController: React.FC<PropsNode> = ({ children }) => {
       {userData ? (
         <div className="content">
           {children}{" "}
-          <h3 className="total">
-            {t("total")}: ${total}
-          </h3>
+          {total !== 0 && (
+            <div className="total">
+              <h5>{t("have_selected")}:</h5>
+              <Link className="btn btn-lg btn-success" to="/resume">
+                {t("see_resume")}
+              </Link>
+            </div>
+          )}
         </div>
       ) : (
         <GetUserData />

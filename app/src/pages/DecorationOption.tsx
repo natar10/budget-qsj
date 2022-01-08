@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { isItemSelected } from "../common/functions";
+import { calculateTotal, isItemSelected } from "../common/functions";
 import { Decoration, Props, Additional } from "../common/types";
 import { useAppContext } from "../context/AppContext";
 import UserDataController from "../components/UserDataController";
@@ -19,6 +19,7 @@ const DecorationOption: React.FC<Props> = (props) => {
   const { selectUniqueItems, selectedUniqueItems, contentfulClient, userData } =
     useAppContext();
   const [decoration, setDecoration] = useState<Decoration | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const { decorationId } = useParams<Params>();
 
   useEffect(() => {
@@ -26,72 +27,80 @@ const DecorationOption: React.FC<Props> = (props) => {
     decorations
       .getDecoration(contentfulClient, decorationId)
       .then((decorationItem: Decoration) => setDecoration(decorationItem))
-      .catch((e) => console.log(e));
+      .catch((e) => console.log(e))
+      .finally(() => setIsLoading(false));
   }, [decorationId, userData]);
 
-  const selectDecoration = (value: number, item: string) => {
+  const selectDecoration = (product: Decoration) => {
     if (!selectUniqueItems) return;
-    selectUniqueItems({ type: "decoration", value, item });
+    selectUniqueItems({ type: "decoration", product });
   };
 
   return (
-    <UserDataController>
-      {decoration ? (
-        <>
-          <h2 className="mb-4">{decoration.title}</h2>
-          <Row>
-            <Col md={8}>
-              <ReactMarkdown>{decoration.description}</ReactMarkdown>
-            </Col>
-            <Col className="text-center">
-              <h1>${decoration.value}</h1>
-              <div className="d-grid gap-2">
-                <a
-                  href="#decoration_photos"
-                  className="m-2 btn btn-outline-primary btn-lg m-2"
-                >
-                  {t("see_photos")}
-                </a>
-                {isItemSelected(decoration.id, selectedUniqueItems) ? (
-                  <>
-                    <h3>{t("selected")}</h3>
-                    <Link
-                      to="/decoration"
-                      className="d-block btn btn-success btn-lg"
-                    >
-                      {t("continue_decoration")}
-                    </Link>
-                  </>
-                ) : (
-                  <Button
-                    className="d-block"
-                    onClick={() =>
-                      selectDecoration(decoration.value, decoration.id)
-                    }
-                    variant="success"
-                    size="lg"
+    <div className={userData ? "general" : "home"}>
+      <UserDataController>
+        {isLoading && <h2 className="mt-3">{t("loading")}</h2>}
+        {decoration && (
+          <>
+            <h2 className="mb-4">{decoration.title}</h2>
+            <Row>
+              <Col md={8}>
+                <ReactMarkdown>{decoration.description}</ReactMarkdown>
+              </Col>
+              <Col className="text-center">
+                <h1>
+                  $
+                  {userData &&
+                    calculateTotal(
+                      { type: "decoration", product: decoration },
+                      +userData.quantity
+                    )}
+                </h1>
+                <div className="d-grid gap-2">
+                  <a
+                    href="#decoration_photos"
+                    className="m-2 btn btn-outline-primary btn-lg m-2"
                   >
-                    {t("select")}
-                  </Button>
-                )}
-                <Link
-                  to="/decoration"
-                  className="d-block btn btn-outline-secondary btn-lg"
-                >
-                  {t("more_options")}
-                </Link>
-              </div>
-            </Col>
-          </Row>
-          <h3 id="decoration_photos" className="mb-5 mt-3">
-            {t("decoration_photos")}
-          </h3>
-          <GooglePhotos albumId={decoration.photosUrl} />
-        </>
-      ) : (
-        <h2>Loading...</h2>
-      )}
-    </UserDataController>
+                    {t("see_photos")}
+                  </a>
+                  {!isItemSelected(decoration.id, selectedUniqueItems) ? (
+                    <Button
+                      className="d-block"
+                      onClick={() => selectDecoration(decoration)}
+                      variant="success"
+                      size="lg"
+                    >
+                      {t("select")}
+                    </Button>
+                  ) : (
+                    <h3>{t("selected")}</h3>
+                  )}
+                  {isItemSelected(decoration.id, selectedUniqueItems) && (
+                    <Link
+                      to="/services"
+                      className="d-block btn btn-warning btn-lg"
+                    >
+                      {t("continue_services")}
+                    </Link>
+                  )}
+
+                  <Link
+                    to="/decoration"
+                    className="d-block btn btn-outline-secondary btn-lg"
+                  >
+                    {t("more_options")}
+                  </Link>
+                </div>
+              </Col>
+            </Row>
+            <h3 id="decoration_photos" className="mb-5 mt-3">
+              {t("decoration_photos")}
+            </h3>
+            <GooglePhotos albumId={decoration.photosUrl} />
+          </>
+        )}
+      </UserDataController>
+    </div>
   );
 };
 

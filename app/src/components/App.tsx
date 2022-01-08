@@ -9,7 +9,7 @@ import DecorationOption from "../pages/DecorationOption";
 import Decoration from "../pages/Decoration";
 import Services from "../pages/Services";
 import Reception from "../pages/Reception";
-import SideMenu from "./SideMenu";
+import Resume from "../pages/Resume";
 
 const App = () => {
   return (
@@ -23,6 +23,7 @@ const App = () => {
           <DecorationOption exact path="decoration/:decorationId" />
           <Services exact path="/services" />
           <Reception exact path="/reception" />
+          <Resume path="/resume" />
         </Router>
       </AppContextProvider>
     </Suspense>

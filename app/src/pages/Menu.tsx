@@ -12,17 +12,20 @@ const Menu: React.FC<Props> = (props) => {
   const { t } = useTranslation("es");
   const [allMenus, setAllMenus] = useState<Menu[]>([]);
   const { contentfulClient, userData, selectedUniqueItems } = useAppContext();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   useEffect(() => {
     if (!contentfulClient) return;
     menus
       .getMenus(contentfulClient, "menu")
       .then((allMenus) => setAllMenus(allMenus))
-      .catch((e) => console.log(e));
+      .catch((e) => console.log(e))
+      .finally(() => setIsLoading(false));
   }, [userData]);
   return (
     <div className={userData ? "general" : "home"}>
       <UserDataController>
         <h2>{t("select_menu")}:</h2>
+        {isLoading && <h2 className="mt-3">{t("loading")}</h2>}
         {isCategorySelected("menu", selectedUniqueItems) && (
           <h3>{t("menu_selected")}</h3>
         )}
@@ -30,6 +33,7 @@ const Menu: React.FC<Props> = (props) => {
           {allMenus.map((menu) => (
             <Col className="option" key={menu.id}>
               <h3>{menu.title}</h3>
+              <p>{menu.description} </p>
               <Link className="mt-3" to={`/menu/${menu.id}`}>
                 <img
                   width="90%"
@@ -38,7 +42,7 @@ const Menu: React.FC<Props> = (props) => {
                 />
               </Link>
               {isItemSelected(menu.id, selectedUniqueItems) && (
-                <p>{t("chosen")}</p>
+                <h4 className="mt-3">{t("chosen")}</h4>
               )}
               <Link
                 className="btn btn-success btn-lg mt-3"

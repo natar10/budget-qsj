@@ -6,7 +6,7 @@ import {
   SelectedItem,
   UserData,
 } from "../common/types";
-import { isCategorySelected } from "../common/functions";
+import { calculateTotal, isCategorySelected } from "../common/functions";
 import { createClient } from "../services/contentful";
 
 const AppContext = createContext<ContextState>({
@@ -36,7 +36,13 @@ const Provider: React.FC = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    const reducer = (acc: number, item: SelectedItem) => acc + item.value;
+    const reducer = (acc: number, item: SelectedItem) => {
+      const itemTotal =
+        item.product.calculate && userData
+          ? calculateTotal(item, +userData.quantity)
+          : item.product.value;
+      return acc + itemTotal;
+    };
     const uniqueTotal = selectedUniqueItems.reduce(reducer, 0);
     const variousTotal = selectedVariousItems.reduce(reducer, 0);
     setTotal(uniqueTotal + variousTotal);
@@ -63,6 +69,13 @@ const Provider: React.FC = ({ children }) => {
     },
     selectVariousItems: (item: SelectedItem) => {
       setSelectedVariousItems([...selectedVariousItems, item]);
+    },
+    removeVariousItems: (item: SelectedItem) => {
+      setSelectedVariousItems([
+        ...selectedVariousItems.filter(
+          (selected) => selected.product.id !== item.product.id
+        ),
+      ]);
     },
   };
 

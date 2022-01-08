@@ -13,21 +13,14 @@ const Home: React.FC<Props> = (props) => {
       <UserDataController>
         <h1>{t("welcome")}</h1>
         <h3>{t("calculate_budget")}</h3>
+        <hr />
         <h4>{t("several_options")}</h4>
         <h4>{t("navigate")}</h4>
-        <h3>{t("start")}</h3>
+        <hr />
+        <h2>{t("start")}</h2>
         <div className="start-buttons">
-          <Link className="btn btn-outline-success btn-lg" to="menu">
-            {t("menu")}
-          </Link>
-          <Link className="btn btn-outline-primary btn-lg" to="decoration">
-            {t("decoration")}
-          </Link>
-          <Link className="btn btn-outline-warning btn-lg" to="services">
-            {t("services")}
-          </Link>
-          <Link className="btn btn-outline-dark btn-lg" to="reception">
-            {t("reception")}
+          <Link className="btn btn-success btn-xlg" to="menu">
+            {t("base_option")}
           </Link>
         </div>
       </UserDataController>

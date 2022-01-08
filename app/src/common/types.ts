@@ -14,6 +14,7 @@ export type ContextState = {
   setTotal?: (value: number) => void;
   selectUniqueItems?: (item: SelectedItem) => void;
   selectVariousItems?: (item: SelectedItem) => void;
+  removeVariousItems?: (item: SelectedItem) => void;
 };
 
 export interface Props {
@@ -23,9 +24,8 @@ export interface Props {
 
 export type ContentType = "menu" | "service" | "decoration" | "reception";
 export interface SelectedItem {
-  item: string;
-  value: number;
   type: ContentType;
+  product: Menu | Decoration | Service | Additional | Reception;
 }
 
 export interface UserData {
@@ -34,7 +34,7 @@ export interface UserData {
   email: string;
   phone: string;
   eventDate: string;
-  quantity: string;
+  quantity: number;
 }
 
 export interface PropsNode {
@@ -53,6 +53,7 @@ export interface Menu {
   option1?: string;
   option2?: string;
   option3?: string;
+  calculate: boolean;
 }
 
 export interface Additional {
@@ -63,6 +64,7 @@ export interface Additional {
   text?: string;
   text2?: string;
   text3?: string;
+  calculate: boolean;
 }
 
 export interface Decoration {
@@ -73,6 +75,7 @@ export interface Decoration {
   value: number;
   mainPhoto: Asset;
   additionalPhotos: Asset[];
+  calculate: boolean;
 }
 
 export interface Service {
@@ -83,6 +86,7 @@ export interface Service {
   value: number;
   mainPhoto: Asset;
   additionalPhotos: Asset[];
+  calculate: boolean;
 }
 
 export interface Reception {
@@ -93,6 +97,7 @@ export interface Reception {
   value: number;
   mainPhoto: Asset;
   additionalPhotos: Asset[];
+  calculate: boolean;
 }
 
 export interface GooglePhoto {
