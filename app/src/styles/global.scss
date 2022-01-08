@@ -8,6 +8,10 @@
   height: 100vh;
 }
 
+body {
+  padding-bottom: 7em;
+}
+
 h1 {
   font-family: "Dancing Script";
   font-weight: 900;
@@ -43,6 +47,14 @@ label {
   color: rgb(19, 19, 19);
 }
 
+.general {
+  text-align: center;
+}
+
+.start-buttons .btn {
+  margin: 5px 10px;
+}
+
 h2 {
   font-size: 4em;
 }
@@ -62,6 +74,10 @@ h5 {
 label.form-label {
   font-size: 1.2em;
   margin-bottom: 0.1rem;
+}
+
+.content {
+  padding-top: 8em;
 }
 
 .introduction {
@@ -86,4 +102,65 @@ label.form-label {
 
 .imgMenus img {
   width: 100%;
+}
+
+.menu-bar {
+  width: 100%;
+  background: #fff;
+  position: fixed;
+  left: 0;
+  padding: 8px;
+  text-align: center;
+}
+
+.menu-bar h1 {
+  font-size: 3.2em;
+  padding: 0px !important;
+}
+
+.menu-bar a {
+  text-decoration: none;
+  color: #000;
+}
+
+.menu-item {
+  padding: 10px 12px 4px;
+  text-decoration: none;
+  color: #2e2e2e;
+  font-size: 1.2em;
+  border-bottom: solid 2px;
+  margin: 0 16px;
+}
+
+.services {
+  border: solid;
+  text-align: center;
+  padding: 10px;
+  margin: 0px 15px;
+}
+
+.services img {
+  padding-bottom: 10px;
+}
+
+.services .value {
+  font-family: "Dancing Script";
+  font-weight: bold;
+  font-size: 2.5em;
+  width: 107px;
+  background: #fff;
+  float: right;
+  margin: -40px 0;
+  position: absolute;
+  border: solid 2px;
+  border-radius: 100%;
+}
+
+.total {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 10px 30px;
+  border: solid 2px;
+  background-color: white;
 }

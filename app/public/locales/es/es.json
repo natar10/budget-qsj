@@ -1,9 +1,9 @@
 {
   "home": "Inicio",
   "menu": "Menu",
-  "decoration": "Decoration",
-  "services": "Services",
-  "reception": "Reception",
+  "decoration": "Decoracion",
+  "services": "Servicios",
+  "reception": "Recepcion",
   "quote": "Iniciar mi presupuesto",
   "get_budget": "Calcula el presupuesto para tu evento",
   "options": "Tenemos varias opciones para la celebracion de tu evento.",
@@ -18,6 +18,7 @@
   "see_options": "Ver Opciones",
   "select_menu": "Selecciona tu menu",
   "menu_selected": "Ya seleccionaste el menu",
+  "decoration_selected": "Ya seleccionaste la decoracion",
   "chosen": "This item is selected",
   "included": "Servicios Incluidos",
   "see_menus": "Ver menus",
@@ -27,5 +28,12 @@
   "menu_options": "Ejemplos de menus para esta opcion",
   "menu_photos": "Fotos del menu",
   "more_options": "Ver otras opciones",
-  "continue_decoration": "Continua a Decoracion"
+  "continue_decoration": "Continua a Decoracion",
+  "decoration_photos": "Fotos y ejemplos de la decoracion",
+  "welcome": "Bienvenidos!",
+  "start": "Inicia aqui:",
+  "calculate_budget": "Aqui podras calcular el presupuesto tentativo para tu evento.",
+  "several_options": "Tenemos varias opciones para todos los elementos de tu dia especial.",
+  "navigate": "A continuacion puedes navegar y seleccionar los elementos deseados.",
+  "total": "Total al momento"
 }

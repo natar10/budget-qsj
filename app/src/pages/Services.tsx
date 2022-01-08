@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Props, Service } from "../common/types";
-import { Link } from "@reach/router";
 import { useAppContext } from "../context/AppContext";
 import UserDataController from "../components/UserDataController";
 import { services } from "../services/contentful";
-import { isItemSelected, isCategorySelected } from "../common/functions";
+import { isItemSelected } from "../common/functions";
+import { useTranslation } from "react-i18next";
+import { Col, Row, Button } from "react-bootstrap";
 
 const Service: React.FC<Props> = (props) => {
+  const { t } = useTranslation("es");
   const [allServices, setAllServices] = useState<Service[]>([]);
   const {
     contentfulClient,
@@ -27,18 +29,31 @@ const Service: React.FC<Props> = (props) => {
   };
   return (
     <UserDataController>
-      <h1>Service</h1>
-      {allServices.map((service) => (
-        <div key={service.id}>
-          <h3>{service.title}</h3>
-          {isItemSelected(service.id, selectedVariousItems) && (
-            <p>This item is selected</p>
-          )}
-          <button onClick={() => selectService(service.value, service.id)}>
-            Select this option
-          </button>
-        </div>
-      ))}
+      <h1>{t("services")}</h1>
+      <Row>
+        {allServices.map((service) => (
+          <Col className="services" key={service.id}>
+            <h3>{service.title}</h3>
+            {isItemSelected(service.id, selectedVariousItems) && (
+              <p>{t("selected")}</p>
+            )}
+            <p>{service.description}</p>
+            <img
+              width="90%"
+              src={service.mainPhoto.fields.file.url}
+              alt={service.title}
+            />
+            <div className="value">${service.value}</div>
+            <Button
+              variant="success"
+              size="lg"
+              onClick={() => selectService(service.value, service.id)}
+            >
+              {t("select")}
+            </Button>
+          </Col>
+        ))}
+      </Row>
     </UserDataController>
   );
 };

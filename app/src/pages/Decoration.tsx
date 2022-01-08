@@ -5,8 +5,11 @@ import { useAppContext } from "../context/AppContext";
 import UserDataController from "../components/UserDataController";
 import { decorations } from "../services/contentful";
 import { isItemSelected, isCategorySelected } from "../common/functions";
+import { Col, Row } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 
 const Decoration: React.FC<Props> = (props) => {
+  const { t } = useTranslation("es");
   const [allDecorations, setAllDecorations] = useState<Decoration[]>([]);
   const { contentfulClient, userData, selectedUniqueItems } = useAppContext();
   useEffect(() => {
@@ -20,17 +23,31 @@ const Decoration: React.FC<Props> = (props) => {
     <UserDataController>
       <h1>Decoration</h1>
       {isCategorySelected("decoration", selectedUniqueItems) && (
-        <h3>Ya seleccionaste la decoracion</h3>
+        <h3>{t("decoration_selected")}</h3>
       )}
-      {allDecorations.map((decoration) => (
-        <div key={decoration.id}>
-          <h3>{decoration.title}</h3>
-          {isItemSelected(decoration.id, selectedUniqueItems) && (
-            <p>This item is selected</p>
-          )}
-          <Link to={`/decoration/${decoration.id}`}>Ver Opciones</Link>
-        </div>
-      ))}
+      <Row>
+        {allDecorations.map((decoration) => (
+          <Col className="option" key={decoration.id}>
+            <h3>{decoration.title}</h3>
+            <Link className="mt-3" to={`/decoration/${decoration.id}`}>
+              <img
+                width="90%"
+                src={decoration.mainPhoto.fields.file.url}
+                alt={decoration.title}
+              />
+            </Link>
+            {isItemSelected(decoration.id, selectedUniqueItems) && (
+              <p>{t("chosen")}</p>
+            )}
+            <Link
+              className="btn btn-success btn-lg mt-3"
+              to={`/decoration/${decoration.id}`}
+            >
+              {t("see_options")}
+            </Link>
+          </Col>
+        ))}
+      </Row>
     </UserDataController>
   );
 };

@@ -30,12 +30,9 @@ const Menu: React.FC<Props> = (props) => {
           {allMenus.map((menu) => (
             <Col className="option" key={menu.id}>
               <h3>{menu.title}</h3>
-              <Link
-                className="btn btn-secondary btn-lg mt-3"
-                to={`/menu/${menu.id}`}
-              >
+              <Link className="mt-3" to={`/menu/${menu.id}`}>
                 <img
-                  width="100%"
+                  width="90%"
                   src={menu.mainPhoto.fields.file.url}
                   alt={menu.title}
                 />
@@ -44,7 +41,7 @@ const Menu: React.FC<Props> = (props) => {
                 <p>{t("chosen")}</p>
               )}
               <Link
-                className="btn btn-secondary btn-lg mt-3"
+                className="btn btn-success btn-lg mt-3"
                 to={`/menu/${menu.id}`}
               >
                 {t("see_options")}
