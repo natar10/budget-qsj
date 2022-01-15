@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "storage": {
+      "budgetQsjDynamo": [
+        "create",
+        "read",
+        "update"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

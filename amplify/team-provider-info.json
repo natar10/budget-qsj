@@ -21,7 +21,11 @@
       "function": {
         "qsjBudgetPhotos": {
           "deploymentBucketName": "amplify-budgetqsj-dev-130519-deployment",
-          "s3Key": "amplify-builds/qsjBudgetPhotos-3369345a6f5746456667-build.zip"
+          "s3Key": "amplify-builds/qsjBudgetPhotos-612f75724245702b5578-build.zip"
+        },
+        "budgetQsjDynamoAccess": {
+          "deploymentBucketName": "amplify-budgetqsj-dev-130519-deployment",
+          "s3Key": "amplify-builds/budgetQsjDynamoAccess-6e5a795837463845466c-build.zip"
         }
       }
     }

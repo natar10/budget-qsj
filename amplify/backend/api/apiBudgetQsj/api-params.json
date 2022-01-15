@@ -2,7 +2,7 @@
     "paths": [
         {
             "name": "/photos",
-            "lambdaFunction": "qsjBudgetPhotos",
+            "lambdaFunction": "budgetQsjDynamoAccess",
             "privacy": {
                 "open": true
             },
@@ -13,7 +13,7 @@
     "apiName": "apiBudgetQsj",
     "functionArns": [
         {
-            "lambdaFunction": "qsjBudgetPhotos"
+            "lambdaFunction": "budgetQsjDynamoAccess"
         }
     ],
     "privacy": {
@@ -25,11 +25,12 @@
     "dependsOn": [
         {
             "category": "function",
-            "resourceName": "qsjBudgetPhotos",
+            "resourceName": "budgetQsjDynamoAccess",
             "attributes": [
                 "Name",
                 "Arn"
             ]
         }
-    ]
+    ],
+    "uuid": "a5b05a20"
 }

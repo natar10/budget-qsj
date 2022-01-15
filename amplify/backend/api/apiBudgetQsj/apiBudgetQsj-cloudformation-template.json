@@ -14,15 +14,15 @@
         },
     
     
-          "functionqsjBudgetPhotosName": {
+          "functionbudgetQsjDynamoAccessName": {
             "Type": "String",
-            "Default": "functionqsjBudgetPhotosName"
+            "Default": "functionbudgetQsjDynamoAccessName"
           },
         
           
-          "functionqsjBudgetPhotosArn": {
+          "functionbudgetQsjDynamoAccessArn": {
             "Type": "String",
-            "Default": "functionqsjBudgetPhotosArn"
+            "Default": "functionbudgetQsjDynamoAccessArn"
           }
         
           
@@ -176,7 +176,7 @@
                             
                             {
                                 
-                                "Ref": "functionqsjBudgetPhotosArn"
+                                "Ref": "functionbudgetQsjDynamoAccessArn"
                             },
                             
                             "/invocations"
@@ -275,7 +275,7 @@
                           
                           {
                             
-                            "Ref": "functionqsjBudgetPhotosArn"
+                            "Ref": "functionbudgetQsjDynamoAccessArn"
                           },
                           
                           "/invocations"
@@ -332,12 +332,12 @@
                   
         
         
-        "functionqsjBudgetPhotosPermissionapiBudgetQsj": {
+        "functionbudgetQsjDynamoAccessPermissionapiBudgetQsj": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
                 "FunctionName": 
                     {
-                        "Ref":  "functionqsjBudgetPhotosName"
+                        "Ref":  "functionbudgetQsjDynamoAccessName"
                     },
                     
                     "Action": "lambda:InvokeFunction",
@@ -367,7 +367,7 @@
         
         
         
-      "DeploymentAPIGWapiBudgetQsj": {
+      "DeploymentAPIGWapiBudgetQsja5b05a20": {
         "Type": "AWS::ApiGateway::Deployment",
         "Properties": {
           "Description": "The Development stage deployment of your API.",

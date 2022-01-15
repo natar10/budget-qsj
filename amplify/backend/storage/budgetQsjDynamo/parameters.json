@@ -1,0 +1,5 @@
+{
+    "tableName": "budgetQsj",
+    "partitionKeyName": "id",
+    "partitionKeyType": "S"
+}

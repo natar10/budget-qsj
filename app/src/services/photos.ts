@@ -1,4 +1,3 @@
-import axios from "axios";
 import { API } from "aws-amplify";
 
 export const getPhotos = (album: string) => {
@@ -6,7 +5,6 @@ export const getPhotos = (album: string) => {
   const t = "tester";
   return API.get("apiBudgetQsj", `/photos/${album}`, null)
     .then((response) => {
-      console.log("********response", response);
       return response;
     })
     .catch((err: any) => {

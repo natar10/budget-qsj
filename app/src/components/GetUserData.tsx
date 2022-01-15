@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { AppContextProvider, useAppContext } from "../context/AppContext";
 import { UserData } from "../common/types";
 import DatePicker from "react-datepicker";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Row, Col, Form, Button } from "react-bootstrap";
+import { API } from "aws-amplify";
 import "react-datepicker/dist/react-datepicker.css";
 
 const Home: React.FC = () => {
   const { t } = useTranslation("es");
+  const [isLoading, setIsLoading] = useState(false);
   const { setData } = useAppContext();
   const {
     register,
@@ -19,6 +21,17 @@ const Home: React.FC = () => {
   } = useForm();
 
   const onSubmit = (data: UserData) => {
+    setIsLoading(true);
+    console.log("data", data);
+    const bodyData = {
+      body: data,
+    };
+    API.post("apiBudgetQsj", "/photos", bodyData)
+      .then((response) => {
+        console.log("OKOKOK", response);
+        setIsLoading(false);
+      })
+      .catch((e) => console.log("eeeeeeeeeee", e));
     if (setData) {
       setData(data);
     }
@@ -130,7 +143,7 @@ const Home: React.FC = () => {
             </Form.Group>
 
             <Button type="submit" variant="light" size="lg">
-              {t("quote")}
+              {isLoading ? t("loading") : t("quote")}
             </Button>
           </Form>
         </Col>

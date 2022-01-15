@@ -12,6 +12,21 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
       "dependsOn": []
+    },
+    "budgetQsjDynamoAccess": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "budgetQsjDynamo",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
     }
   },
   "api": {
@@ -21,13 +36,19 @@
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "qsjBudgetPhotos",
+          "resourceName": "budgetQsjDynamoAccess",
           "attributes": [
             "Name",
             "Arn"
           ]
         }
       ]
+    }
+  },
+  "storage": {
+    "budgetQsjDynamo": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation"
     }
   }
 }

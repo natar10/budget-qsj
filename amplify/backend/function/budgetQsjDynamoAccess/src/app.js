@@ -6,6 +6,13 @@ or in the "license" file accompanying this file. This file is distributed on an 
 See the License for the specific language governing permissions and limitations under the License.
 */
 
+/* Amplify Params - DO NOT EDIT
+	ENV
+	REGION
+	STORAGE_BUDGETQSJDYNAMO_ARN
+	STORAGE_BUDGETQSJDYNAMO_NAME
+Amplify Params - DO NOT EDIT */
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const awsServerlessExpressMiddleware = require("aws-serverless-express/middleware");
@@ -59,14 +66,12 @@ app.get("/photos/:albumId", function (req, res) {
  ****************************/
 
 function id() {
-  return Math.random().toString(36).substring(2) + Date.now().toString(36);
+  return Date.now().toString();
 }
 
 app.post("/photos", function (req, res) {
-  console.log("req.body.data", req.body);
-  console.log("process.env", process.env);
   var params = {
-    TableName: "budgetQsj",
+    TableName: process.env.STORAGE_BUDGETQSJDYNAMO_NAME,
     Item: {
       id: id(),
       ...req.body,
@@ -74,11 +79,11 @@ app.post("/photos", function (req, res) {
   };
 
   docClient.put(params, function (err, data) {
+    console.log("err", err);
+    console.log("data", data);
     if (err) res.json({ err });
-    else res.json({ success: "Solicitud creada exitosamente!" });
+    else res.json({ success: "Solicitud creada exitosamente!", data });
   });
-
-  res.json({ success: "post call succeed!" });
 });
 
 app.post("/photos/*", function (req, res) {
