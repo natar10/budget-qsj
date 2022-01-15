@@ -24,6 +24,8 @@ const GOLD_PRICE = {
 const LOWER_PAX = 60;
 const HIGHER_PAX = 150;
 
+const IVA = 1.12;
+
 const DECORATIONS = {
   bronze: "73hLxLlwAEi1H6cLPybZUM",
   silver: "5433Jq4fKTrNKFXQWVUdMK",
@@ -41,4 +43,5 @@ export {
   HIGHER_PAX,
   DECORATIONS,
   WEDDING_PHOTOS,
+  IVA,
 };

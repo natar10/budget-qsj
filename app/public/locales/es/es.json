@@ -53,5 +53,6 @@
   "fill_form": "Indicanos tus datos para iniciar:",
   "base_option": "Elige tu paquete base",
   "loading": "Cargando...",
-  "remove": "Quitar"
+  "remove": "Quitar",
+  "iva_not_included": "Los precios no incluyen iva. Total mas IVA"
 }

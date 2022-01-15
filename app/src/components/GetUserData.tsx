@@ -22,16 +22,14 @@ const Home: React.FC = () => {
 
   const onSubmit = (data: UserData) => {
     setIsLoading(true);
-    console.log("data", data);
     const bodyData = {
       body: data,
     };
     API.post("apiBudgetQsj", "/photos", bodyData)
       .then((response) => {
-        console.log("OKOKOK", response);
         setIsLoading(false);
       })
-      .catch((e) => console.log("eeeeeeeeeee", e));
+      .catch((e) => console.log("Error:", e));
     if (setData) {
       setData(data);
     }

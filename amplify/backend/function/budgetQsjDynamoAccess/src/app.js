@@ -17,6 +17,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const awsServerlessExpressMiddleware = require("aws-serverless-express/middleware");
 const getPhotos = require("./getPhotos");
+const mailchimp = require("@mailchimp/mailchimp_marketing");
 
 // declare a new express app
 const app = express();
@@ -69,7 +70,7 @@ function id() {
   return Date.now().toString();
 }
 
-app.post("/photos", function (req, res) {
+app.post("/photos", async function (req, res) {
   var params = {
     TableName: process.env.STORAGE_BUDGETQSJDYNAMO_NAME,
     Item: {
@@ -77,10 +78,35 @@ app.post("/photos", function (req, res) {
       ...req.body,
     },
   };
+  mailchimp.setConfig({
+    apiKey: "ed5a5f97c7fa78d60936409cc54b5d1f-us20",
+    server: "us20",
+  });
+  const listId = "5be83400c4";
+  const subscribingUser = {
+    firstName: req.body.name,
+    email: req.body.email,
+    eventType: req.body.eventType,
+    phone: req.body.phone,
+    quantity: req.body.quantity,
+  };
+
+  try {
+    await mailchimp.lists.addListMember(listId, {
+      email_address: subscribingUser.email,
+      status: "subscribed",
+      merge_fields: {
+        FNAME: subscribingUser.firstName,
+        PHONE: subscribingUser.phone,
+        EVENT: subscribingUser.eventType,
+        QUANTITY: subscribingUser.quantity,
+      },
+    });
+  } catch (error) {
+    console.error;
+  }
 
   docClient.put(params, function (err, data) {
-    console.log("err", err);
-    console.log("data", data);
     if (err) res.json({ err });
     else res.json({ success: "Solicitud creada exitosamente!", data });
   });

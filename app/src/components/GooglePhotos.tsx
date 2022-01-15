@@ -9,12 +9,11 @@ type Props = {
 
 const MenuOption: React.FC<Props> = (props) => {
   const [photos, setPhotos] = useState<string[]>([]);
-  console.log(props.albumId);
 
   useEffect(() => {
     getPhotos(props.albumId)
       .then((data: { photos: string[] }) => setPhotos(data.photos))
-      .catch((e) => console.log(e));
+      .catch(console.log);
   }, [props.albumId]);
 
   return (

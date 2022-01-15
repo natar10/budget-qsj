@@ -72,7 +72,7 @@ const MenuOption: React.FC<Props> = (props) => {
                 </div>
               </Col>
               <Col className="text-center">
-                <h1>${menu.value}</h1>
+                <h1>${menu.value}pp</h1>
                 <a
                   href="#menu_options"
                   className="m-2 btn btn-outline-success btn-lg m-2"

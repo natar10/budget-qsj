@@ -7,6 +7,7 @@ import { Props } from "../common/types";
 import { calculateTotal } from "../common/functions";
 import { Redirect } from "@reach/router";
 import SocialNetworks from "../components/SocialNetworks";
+import { IVA } from "../common/constants";
 
 const Resume: React.FC<Props> = () => {
   const { t } = useTranslation("es");
@@ -46,9 +47,13 @@ const Resume: React.FC<Props> = () => {
               <Row className="resume_row" key={item.product.id}>
                 <Col>{item.product.title}</Col>
                 <Col className="d-none d-md-block">{t(item.type)}</Col>
-                <Col>${item.product.value}</Col>
                 <Col>
-                  {item.product.calculate
+                  {item.type !== "decoration"
+                    ? `$${item.product.value}`
+                    : t("flat_value")}
+                </Col>
+                <Col>
+                  {item.product.calculate && item.type !== "decoration"
                     ? userData?.quantity
                     : t("flat_value")}
                 </Col>
@@ -66,7 +71,7 @@ const Resume: React.FC<Props> = () => {
             {selectedVariousItems.map((item) => (
               <Row className="resume_row" key={item.product.id}>
                 <Col>{item.product.title}</Col>
-                <Col className="d-none d-md-block">{item.type}</Col>
+                <Col className="d-none d-md-block">{t(item.type)}</Col>
                 <Col>${item.product.value}</Col>
                 <Col>
                   {item.product.calculate
@@ -86,6 +91,9 @@ const Resume: React.FC<Props> = () => {
             <h3>
               {t("total")}: ${total}
             </h3>
+            <p>
+              {t("iva_not_included")}: ${(total * IVA).toFixed(2)}
+            </p>
             <hr className="mt-4 mb-4" />
             <SocialNetworks />
           </UserDataController>
