@@ -29,7 +29,7 @@ const Resume: React.FC<Props> = () => {
               <Col>
                 <strong>Producto seleccionado</strong>
               </Col>
-              <Col>
+              <Col className="d-none d-md-block">
                 <strong>Categoria</strong>
               </Col>
               <Col>
@@ -45,7 +45,7 @@ const Resume: React.FC<Props> = () => {
             {selectedUniqueItems.map((item) => (
               <Row className="resume_row" key={item.product.id}>
                 <Col>{item.product.title}</Col>
-                <Col>{t(item.type)}</Col>
+                <Col className="d-none d-md-block">{t(item.type)}</Col>
                 <Col>${item.product.value}</Col>
                 <Col>
                   {item.product.calculate
@@ -66,7 +66,7 @@ const Resume: React.FC<Props> = () => {
             {selectedVariousItems.map((item) => (
               <Row className="resume_row" key={item.product.id}>
                 <Col>{item.product.title}</Col>
-                <Col>{item.type}</Col>
+                <Col className="d-none d-md-block">{item.type}</Col>
                 <Col>${item.product.value}</Col>
                 <Col>
                   {item.product.calculate

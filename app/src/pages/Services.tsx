@@ -46,35 +46,42 @@ const Service: React.FC<Props> = (props) => {
         {isLoading && <h2 className="mt-3">{t("loading")}</h2>}
         <Row>
           {allServices.map((service) => (
-            <Col className="services" key={service.id}>
-              <h3>{service.title}</h3>
-              <p>{service.description}</p>
-              <img
-                width="90%"
-                src={service.mainPhoto.fields.file.url}
-                alt={service.title}
-              />
-              <div className="value">${service.value}</div>
-              {isItemSelected(service.id, selectedVariousItems) && (
-                <h4 className="mt-3">{t("selected")}</h4>
-              )}
-              <Button
-                variant={
-                  isItemSelected(service.id, selectedVariousItems)
-                    ? "danger"
-                    : "success"
-                }
-                size="lg"
-                onClick={() =>
-                  isItemSelected(service.id, selectedVariousItems)
-                    ? removeService(service)
-                    : selectService(service)
-                }
-              >
-                {isItemSelected(service.id, selectedVariousItems)
-                  ? t("remove")
-                  : t("select")}
-              </Button>
+            <Col
+              xs={12}
+              md={6}
+              className="services-container mb-2"
+              key={service.id}
+            >
+              <div className="services">
+                <h3>{service.title}</h3>
+                <p>{service.description}</p>
+                <img
+                  width="90%"
+                  src={service.mainPhoto.fields.file.url}
+                  alt={service.title}
+                />
+                <div className="value">${service.value}</div>
+                {isItemSelected(service.id, selectedVariousItems) && (
+                  <h4 className="mt-3">{t("selected")}</h4>
+                )}
+                <Button
+                  variant={
+                    isItemSelected(service.id, selectedVariousItems)
+                      ? "danger"
+                      : "success"
+                  }
+                  size="lg"
+                  onClick={() =>
+                    isItemSelected(service.id, selectedVariousItems)
+                      ? removeService(service)
+                      : selectService(service)
+                  }
+                >
+                  {isItemSelected(service.id, selectedVariousItems)
+                    ? t("remove")
+                    : t("select")}
+                </Button>
+              </div>
             </Col>
           ))}
         </Row>

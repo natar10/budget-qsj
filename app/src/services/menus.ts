@@ -1,6 +1,8 @@
 import { Entry, EntryCollection, ContentfulClientApi } from "contentful";
 import { Menu } from "../common/types";
 
+const compare = (a: Menu, b: Menu) => a.value - b.value;
+
 const getMenus = (client: ContentfulClientApi, type: string) => {
   return client
     .getEntries<Menu>({
@@ -8,9 +10,11 @@ const getMenus = (client: ContentfulClientApi, type: string) => {
       limit: 20,
     })
     .then((response: EntryCollection<Menu>) => {
-      return response.items.map((item) => {
-        return { ...item.fields, id: item.sys.id };
-      });
+      return response.items
+        .map((item) => {
+          return { ...item.fields, id: item.sys.id };
+        })
+        .sort(compare);
     })
     .catch((err: any) => {
       throw new Error(err.message);

@@ -19,7 +19,6 @@ const Home: React.FC = () => {
   } = useForm();
 
   const onSubmit = (data: UserData) => {
-    console.log(data);
     if (setData) {
       setData(data);
     }
@@ -34,13 +33,13 @@ const Home: React.FC = () => {
   return (
     <AppContextProvider>
       <Row>
-        <Col className="introduction" lg={8}>
+        <Col className="introduction mt-3" lg={8}>
           <h2>{t("get_budget")}</h2>
           <h4>{t("find_options")}</h4>
           <hr />
           <h3>{t("fill_form")}</h3>
         </Col>
-        <Col>
+        <Col className="mt-3">
           <Form onSubmit={handleSubmit(onSubmit)}>
             <Form.Group className="mb-3">
               <Form.Label>{t("eventType")}</Form.Label>

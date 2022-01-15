@@ -30,6 +30,8 @@ const DECORATIONS = {
   gold: "6MpV5yuGpN2qext7ZIZhCd",
 };
 
+const WEDDING_PHOTOS = "DJJLRaMB26BNKew17";
+
 export {
   CONTENTFUL_CREDENTIALS,
   BRONZE_PRICE,
@@ -38,4 +40,5 @@ export {
   LOWER_PAX,
   HIGHER_PAX,
   DECORATIONS,
+  WEDDING_PHOTOS,
 };

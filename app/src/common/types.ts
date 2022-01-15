@@ -71,6 +71,9 @@ export interface Decoration {
   id: string;
   title: string;
   description: string;
+  banquet: string;
+  exterior: string;
+  ceremony: string;
   photosUrl: string;
   value: number;
   mainPhoto: Asset;

@@ -31,25 +31,32 @@ const Menu: React.FC<Props> = (props) => {
         )}
         <Row>
           {allMenus.map((menu) => (
-            <Col className="option" key={menu.id}>
-              <h3>{menu.title}</h3>
-              <p>{menu.description} </p>
-              <Link className="mt-3" to={`/menu/${menu.id}`}>
-                <img
-                  width="90%"
-                  src={menu.mainPhoto.fields.file.url}
-                  alt={menu.title}
-                />
-              </Link>
-              {isItemSelected(menu.id, selectedUniqueItems) && (
-                <h4 className="mt-3">{t("chosen")}</h4>
-              )}
-              <Link
-                className="btn btn-success btn-lg mt-3"
-                to={`/menu/${menu.id}`}
-              >
-                {t("see_options")}
-              </Link>
+            <Col
+              sm={12}
+              md={{ span: 5, offset: 1 }}
+              className="ml-1"
+              key={menu.id}
+            >
+              <div className="option">
+                <h3>{menu.title}</h3>
+                <p>{menu.description} </p>
+                <Link className="mt-3" to={`/menu/${menu.id}`}>
+                  <img
+                    width="90%"
+                    src={menu.mainPhoto.fields.file.url}
+                    alt={menu.title}
+                  />
+                </Link>
+                {isItemSelected(menu.id, selectedUniqueItems) && (
+                  <h4 className="mt-3">{t("chosen")}</h4>
+                )}
+                <Link
+                  className="btn btn-success btn-lg mt-3"
+                  to={`/menu/${menu.id}`}
+                >
+                  {t("see_options")}
+                </Link>
+              </div>
             </Col>
           ))}
         </Row>

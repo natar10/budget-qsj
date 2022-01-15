@@ -45,7 +45,21 @@ const DecorationOption: React.FC<Props> = (props) => {
             <h2 className="mb-4">{decoration.title}</h2>
             <Row>
               <Col md={8}>
+                <h2>{t("included_decoration")}</h2>
+                <Row>
+                  <Col sm={12} md={4} className="decoration">
+                    <ReactMarkdown>{decoration.banquet}</ReactMarkdown>
+                  </Col>
+                  <Col sm={12} md={4} className="decoration">
+                    <ReactMarkdown>{decoration.exterior}</ReactMarkdown>
+                  </Col>
+                  <Col sm={12} md={4} className="decoration">
+                    <ReactMarkdown>{decoration.ceremony}</ReactMarkdown>
+                  </Col>
+                </Row>
+                <hr />
                 <ReactMarkdown>{decoration.description}</ReactMarkdown>
+                <hr />
               </Col>
               <Col className="text-center">
                 <h1>

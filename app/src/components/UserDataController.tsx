@@ -6,8 +6,10 @@ import { Container } from "react-bootstrap";
 import MenuBar from "./MenuBar";
 import { useTranslation } from "react-i18next";
 import { Link } from "@reach/router";
+import { useLocation } from "@reach/router";
 
 const UserDataController: React.FC<PropsNode> = ({ children }) => {
+  const location = useLocation();
   const { t } = useTranslation("es");
   const { userData, total } = useAppContext();
   return (
@@ -17,7 +19,7 @@ const UserDataController: React.FC<PropsNode> = ({ children }) => {
       {userData ? (
         <div className="content">
           {children}{" "}
-          {total !== 0 && (
+          {total !== 0 && location.pathname !== "/resume" && (
             <div className="total">
               <h5>{t("have_selected")}:</h5>
               <Link className="btn btn-lg btn-success" to="/resume">

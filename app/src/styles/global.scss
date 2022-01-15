@@ -5,14 +5,11 @@
 .home {
   background-image: url("https://images.ctfassets.net/b7z7r03xo6d7/5VtYb5uQfNWZAq7VDdSsCv/958036be5a0a57b6a2ecf2024f4baa96/DSC09147.jpg?h=1200");
   width: 100%;
-  height: 100vh;
+  height: fit-content;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
-}
-
-body {
-  padding-bottom: 7em;
+  padding-bottom: 20vh;
 }
 
 h1 {
@@ -52,6 +49,7 @@ label {
 
 .general {
   text-align: center;
+  padding-bottom: 6em;
 }
 
 .start-buttons .btn {
@@ -97,10 +95,14 @@ label.form-label {
 }
 
 .option {
-  border: solid 3px #000;
+  border: solid 3px rgb(82, 82, 82);
   padding: 10px;
-  margin: 10px;
   text-align: center;
+  margin-bottom: 15px;
+}
+
+.option li {
+  text-align: left;
 }
 
 .imgMenus {
@@ -139,11 +141,14 @@ label.form-label {
   margin: 0 16px;
 }
 
+.services-container {
+  padding: 10px;
+}
+
 .services {
-  border: solid;
+  border: solid 2px #7a7a7a;
   text-align: center;
   padding: 10px;
-  margin: 0px 15px;
 }
 
 .services img {
@@ -165,7 +170,6 @@ label.form-label {
 
 .total {
   position: fixed;
-  top: 0;
   right: 0;
   padding: 10px 30px;
   border: solid 2px;
@@ -178,4 +182,48 @@ label.form-label {
 .resume_row {
   border-bottom: solid thin rgb(68, 68, 68);
   margin-bottom: 5px;
+}
+
+.decoration {
+  padding: 10px;
+  text-align: left;
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 5em;
+    padding-top: 1em;
+  }
+  .container {
+    width: 88% !important;
+  }
+  .services .value {
+    margin: -62px 0;
+  }
+}
+
+@media (max-width: 400px) {
+  h1 {
+    font-size: 3em;
+    padding-top: 1em;
+  }
+  .menu-bar h1 {
+    font-size: 1.9em;
+  }
+}
+
+@media (max-width: 1040px) {
+  .total {
+    bottom: 0;
+  }
+
+  .total h5 {
+    display: none;
+  }
+}
+
+@media (min-width: 1041px) {
+  .total {
+    top: 0;
+  }
 }

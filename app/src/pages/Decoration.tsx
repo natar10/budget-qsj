@@ -31,24 +31,26 @@ const Decoration: React.FC<Props> = (props) => {
         )}
         <Row>
           {allDecorations.map((decoration) => (
-            <Col className="option" key={decoration.id}>
-              <h3>{decoration.title}</h3>
-              <Link className="mt-3" to={`/decoration/${decoration.id}`}>
-                <img
-                  width="90%"
-                  src={decoration.mainPhoto.fields.file.url}
-                  alt={decoration.title}
-                />
-              </Link>
-              {isItemSelected(decoration.id, selectedUniqueItems) && (
-                <p>{t("chosen")}</p>
-              )}
-              <Link
-                className="btn btn-success btn-lg mt-3"
-                to={`/decoration/${decoration.id}`}
-              >
-                {t("see_options")}
-              </Link>
+            <Col sm={12} md={4} key={decoration.id}>
+              <div className="option">
+                <h3>{decoration.title}</h3>
+                <Link className="mt-3" to={`/decoration/${decoration.id}`}>
+                  <img
+                    width="90%"
+                    src={decoration.mainPhoto.fields.file.url}
+                    alt={decoration.title}
+                  />
+                </Link>
+                {isItemSelected(decoration.id, selectedUniqueItems) && (
+                  <p>{t("chosen")}</p>
+                )}
+                <Link
+                  className="btn btn-success btn-lg mt-3"
+                  to={`/decoration/${decoration.id}`}
+                >
+                  {t("see_options")}
+                </Link>
+              </div>
             </Col>
           ))}
         </Row>

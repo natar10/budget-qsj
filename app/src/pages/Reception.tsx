@@ -46,35 +46,42 @@ const Reception: React.FC<Props> = (props) => {
         {isLoading && <h2 className="mt-3">{t("loading")}</h2>}
         <Row>
           {allReceptions.map((reception) => (
-            <Col className="services" key={reception.id}>
-              <h3>{reception.title}</h3>
-              <p>{reception.description}</p>
-              <img
-                width="90%"
-                src={reception.mainPhoto.fields.file.url}
-                alt={reception.title}
-              />
-              <div className="value">${reception.value}</div>
-              {isItemSelected(reception.id, selectedVariousItems) && (
-                <h4 className="mt-3">{t("selected")}</h4>
-              )}
-              <Button
-                variant={
-                  isItemSelected(reception.id, selectedVariousItems)
-                    ? "danger"
-                    : "success"
-                }
-                size="lg"
-                onClick={() =>
-                  isItemSelected(reception.id, selectedVariousItems)
-                    ? removeReception(reception)
-                    : selectReception(reception)
-                }
-              >
-                {isItemSelected(reception.id, selectedVariousItems)
-                  ? t("remove")
-                  : t("select")}
-              </Button>
+            <Col
+              xs={12}
+              md={6}
+              className="services-container mb-2"
+              key={reception.id}
+            >
+              <div className="services">
+                <h3>{reception.title}</h3>
+                <p>{reception.description}</p>
+                <img
+                  width="90%"
+                  src={reception.mainPhoto.fields.file.url}
+                  alt={reception.title}
+                />
+                <div className="value">${reception.value}</div>
+                {isItemSelected(reception.id, selectedVariousItems) && (
+                  <h4 className="mt-3">{t("selected")}</h4>
+                )}
+                <Button
+                  variant={
+                    isItemSelected(reception.id, selectedVariousItems)
+                      ? "danger"
+                      : "success"
+                  }
+                  size="lg"
+                  onClick={() =>
+                    isItemSelected(reception.id, selectedVariousItems)
+                      ? removeReception(reception)
+                      : selectReception(reception)
+                  }
+                >
+                  {isItemSelected(reception.id, selectedVariousItems)
+                    ? t("remove")
+                    : t("select")}
+                </Button>
+              </div>
             </Col>
           ))}
         </Row>

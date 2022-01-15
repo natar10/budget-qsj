@@ -57,13 +57,13 @@ const MenuOption: React.FC<Props> = (props) => {
                       <>
                         <h3 className="mb-4">{description.title}</h3>
                         <Row>
-                          <Col>
+                          <Col sm={12} md={4}>
                             <ReactMarkdown>{description.text}</ReactMarkdown>
                           </Col>
-                          <Col>
+                          <Col sm={12} md={4}>
                             <ReactMarkdown>{description.text2}</ReactMarkdown>
                           </Col>
-                          <Col>
+                          <Col sm={12} md={4}>
                             <ReactMarkdown>{description.text3}</ReactMarkdown>
                           </Col>
                         </Row>
@@ -121,14 +121,20 @@ const MenuOption: React.FC<Props> = (props) => {
             </h3>
             {menu.option1 && menu.option2 && menu.option3 && (
               <Row>
-                <Col className="option">
-                  <ReactMarkdown>{menu.option1}</ReactMarkdown>
+                <Col sm={12} md={4}>
+                  <div className="option">
+                    <ReactMarkdown>{menu.option1}</ReactMarkdown>
+                  </div>
                 </Col>
-                <Col className="option">
-                  <ReactMarkdown>{menu.option2}</ReactMarkdown>
+                <Col sm={12} md={4}>
+                  <div className="option">
+                    <ReactMarkdown>{menu.option2}</ReactMarkdown>
+                  </div>
                 </Col>
-                <Col className="option">
-                  <ReactMarkdown>{menu.option3}</ReactMarkdown>
+                <Col sm={12} md={4}>
+                  <div className="option">
+                    <ReactMarkdown>{menu.option3}</ReactMarkdown>
+                  </div>
                 </Col>
               </Row>
             )}

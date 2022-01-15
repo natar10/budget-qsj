@@ -4,6 +4,8 @@ import { Link } from "@reach/router";
 import { useTranslation } from "react-i18next";
 import UserDataController from "../components/UserDataController";
 import { useAppContext } from "../context/AppContext";
+import GooglePhotos from "../components/GooglePhotos";
+import { WEDDING_PHOTOS } from "../common/constants";
 
 const Home: React.FC<Props> = (props) => {
   const { t } = useTranslation("es");
@@ -23,6 +25,7 @@ const Home: React.FC<Props> = (props) => {
             {t("base_option")}
           </Link>
         </div>
+        <GooglePhotos albumId={WEDDING_PHOTOS} />
       </UserDataController>
     </div>
   );
