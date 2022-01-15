@@ -79,10 +79,10 @@ app.post("/photos", async function (req, res) {
     },
   };
   mailchimp.setConfig({
-    apiKey: "ed5a5f97c7fa78d60936409cc54b5d1f-us20",
-    server: "us20",
+    apiKey: process.env.MAILCHIMP_API,
+    server: process.env.MAILCHIMP_SERVER,
   });
-  const listId = "5be83400c4";
+  const listId = process.env.MAILCHIMP_LISTID;
   const subscribingUser = {
     firstName: req.body.name,
     email: req.body.email,
