@@ -77,7 +77,7 @@ const Home: React.FC<Props> = (props) => {
             <SocialIcons />
           </>
         ) : (
-          <h3 className="text-center">Loading...</h3>
+          <h3 className="text-center">{t("loading")}</h3>
         )}
       </Container>
     </div>

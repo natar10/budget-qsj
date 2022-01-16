@@ -65,5 +65,7 @@
   "brunch.data": "Dejanos la siguiente informacion y tu mesa quedara reservada.",
   "brunch.quantity": "No. Adultos",
   "brunch.childrenQuantity": "No. Niños",
-  "brunch.requirements": "Algun requerimiento en especifico?"
+  "brunch.requirements": "Algun requerimiento en especifico?",
+  "brunch.thank_for_booking": "Gracias por tu reserva, te contactaremos para confirmar tu asistencia.",
+  "brunch.nice_day": "Un lindo dia!"
 }

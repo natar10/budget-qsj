@@ -123,7 +123,8 @@ app.post("/photos/*", function (req, res) {
  * Example put method *
  ****************************/
 
-app.post("/photos/brunch", function (req, res) {
+app.put("/photos/brunch", async function (req, res) {
+  console.log("*************************** brunch");
   mailchimp.setConfig({
     apiKey: process.env.MAILCHIMP_API,
     server: process.env.MAILCHIMP_SERVER,
@@ -132,28 +133,24 @@ app.post("/photos/brunch", function (req, res) {
 
   try {
     await mailchimp.lists.addListMember(listId, {
-      email_address: subscribingUser.email,
+      email_address: req.body.email,
       status: "subscribed",
       merge_fields: {
-        FNAME: req.body.name.name,
-        ADULTS: req.body.name.quantity,
-        CHILDREN: req.body.name.childrenQuantity,
-        EMAIL: req.body.name.email,
-        PHONE: req.body.name.phone,
-        BRUNCHDATE: req.body.name.date,
-        REQS: req.body.name.requirements,
+        FNAME: req.body.name,
+        ADULTS: req.body.quantity,
+        CHILDREN: req.body.childrenQuantity,
+        EMAIL: req.body.email,
+        PHONE: req.body.phone,
+        BRUNCHDATE: req.body.date,
+        REQS: req.body.requirements,
       },
     });
-    res.json({ success: "Solicitud creada exitosamente!", data });
+    res.json({ success: "Solicitud creada exitosamente!" });
   } catch (error) {
-    res.json({ err });
+    console.log("***************************error", error);
+    res.json({ error });
     console.error;
   }
-});
-
-app.put("/photos/*", function (req, res) {
-  // Add your code here
-  res.json({ success: "put call succeed!", url: req.url, body: req.body });
 });
 
 /****************************

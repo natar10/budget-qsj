@@ -24,6 +24,9 @@ const Home: React.FC<Props> = (props) => {
           <Link className="btn btn-success btn-xlg" to="menu">
             {t("base_option")}
           </Link>
+          <Link className="btn btn-success btn-xlg" to="brunch">
+            {t("base_option")}
+          </Link>
         </div>
         <GooglePhotos albumId={WEDDING_PHOTOS} />
       </UserDataController>
