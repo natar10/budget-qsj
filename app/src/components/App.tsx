@@ -10,6 +10,7 @@ import Decoration from "../pages/Decoration";
 import Services from "../pages/Services";
 import Reception from "../pages/Reception";
 import Resume from "../pages/Resume";
+import Brunch from "../pages/Brunch";
 
 const App = () => {
   return (
@@ -23,7 +24,8 @@ const App = () => {
           <DecorationOption exact path="decoration/:decorationId" />
           <Services exact path="/services" />
           <Reception exact path="/reception" />
-          <Resume path="/resume" />
+          <Resume exact path="/resume" />
+          <Brunch exact path="/brunch" />
         </Router>
       </AppContextProvider>
     </Suspense>

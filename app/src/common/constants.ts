@@ -34,6 +34,10 @@ const DECORATIONS = {
 
 const WEDDING_PHOTOS = "DJJLRaMB26BNKew17";
 
+const CONTENTFUL = {
+  brunchMenu: "2HZbbUKa173chiTXyUF27t",
+};
+
 export {
   CONTENTFUL_CREDENTIALS,
   BRONZE_PRICE,
@@ -44,4 +48,5 @@ export {
   DECORATIONS,
   WEDDING_PHOTOS,
   IVA,
+  CONTENTFUL,
 };

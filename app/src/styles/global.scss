@@ -189,6 +189,62 @@ label.form-label {
   text-align: left;
 }
 
+.main-photo-brunch {
+  height: 250px;
+  overflow: hidden;
+  margin: 10px 0 20px;
+  padding: 0;
+
+  img {
+    width: 100%;
+  }
+}
+
+.brunch-info {
+  li {
+    list-style: none;
+  }
+}
+
+.specialties {
+  img {
+    width: 70%;
+    padding: 10px;
+  }
+}
+
+.costs {
+  text-align: center;
+
+  span {
+    margin-left: -6px;
+  }
+
+  h2,
+  h3 {
+    display: inline;
+    margin: 0 5px;
+  }
+
+  h2 {
+    font-size: 5em;
+  }
+}
+
+.contact {
+  a,
+  a:visited {
+    text-decoration: none;
+    color: #000;
+  }
+}
+
+.brunch {
+  h2 {
+    color: white;
+  }
+}
+
 @media (max-width: 600px) {
   h1 {
     font-size: 5em;

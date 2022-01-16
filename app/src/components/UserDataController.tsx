@@ -15,7 +15,7 @@ const UserDataController: React.FC<PropsNode> = ({ children }) => {
   return (
     <Container>
       {userData && <MenuBar />}
-      {!userData && <h1 className="pt-5 mb-4">Quinta San Joaquin</h1>}
+      {!userData && <h1 className="pt-5 mb-4">{t("qsj")}</h1>}
       {userData ? (
         <div className="content">
           {children}{" "}

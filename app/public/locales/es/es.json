@@ -1,5 +1,6 @@
 {
   "home": "Inicio",
+  "qsj": "Quinta San Joaquin",
   "menu": "Menu",
   "decoration": "Decoracion",
   "services": "Servicios",
@@ -54,5 +55,15 @@
   "base_option": "Elige tu paquete base",
   "loading": "Cargando...",
   "remove": "Quitar",
-  "iva_not_included": "Los precios no incluyen iva. Total mas IVA"
+  "iva_not_included": "Los precios no incluyen iva. Total mas IVA",
+  "brunch.welcome": "Bienvenido a nuestro brunch",
+  "brunch.specialties": "Especialidades de la semana",
+  "brunch.cost": "Costos",
+  "brunch.date": "Selecciona la fecha a la que deseas reservar",
+  "brunch.book": "Reservar",
+  "brunch.book_now": "Puedes resevar aqui",
+  "brunch.data": "Dejanos la siguiente informacion y tu mesa quedara reservada.",
+  "brunch.quantity": "No. Adultos",
+  "brunch.childrenQuantity": "No. Niños",
+  "brunch.requirements": "Algun requerimiento en especifico?"
 }

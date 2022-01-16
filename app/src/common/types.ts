@@ -111,3 +111,22 @@ export interface GooglePhoto {
 export interface GooglePhotoResponse {
   mediaItems: GooglePhoto[];
 }
+
+export interface Brunch {
+  title: string;
+  information: string;
+  contact: string;
+  mainPhoto: Asset;
+  varieties: string;
+  drinks: string;
+  milky: string;
+  specialties1: string;
+  specialties2: string;
+  adultValue: string;
+  childValue: string;
+  adultPriceSpecs: string;
+  childPriceSpecs: string;
+  promotion: string;
+  schedule: string;
+  datesAvailable: Record<string, string>;
+}

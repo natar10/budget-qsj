@@ -89,6 +89,7 @@ app.post("/photos", async function (req, res) {
     eventType: req.body.eventType,
     phone: req.body.phone,
     quantity: req.body.quantity,
+    eventDate: req.body.eventDate,
   };
 
   try {
@@ -100,6 +101,7 @@ app.post("/photos", async function (req, res) {
         PHONE: subscribingUser.phone,
         EVENT: subscribingUser.eventType,
         QUANTITY: subscribingUser.quantity,
+        EVENT_DATE: subscribingUser.eventDate,
       },
     });
   } catch (error) {
@@ -121,9 +123,32 @@ app.post("/photos/*", function (req, res) {
  * Example put method *
  ****************************/
 
-app.put("/photos", function (req, res) {
-  // Add your code here
-  res.json({ success: "put call succeed!", url: req.url, body: req.body });
+app.post("/photos/brunch", function (req, res) {
+  mailchimp.setConfig({
+    apiKey: process.env.MAILCHIMP_API,
+    server: process.env.MAILCHIMP_SERVER,
+  });
+  const listId = process.env.MAILCHIMP_LISTID;
+
+  try {
+    await mailchimp.lists.addListMember(listId, {
+      email_address: subscribingUser.email,
+      status: "subscribed",
+      merge_fields: {
+        FNAME: req.body.name.name,
+        ADULTS: req.body.name.quantity,
+        CHILDREN: req.body.name.childrenQuantity,
+        EMAIL: req.body.name.email,
+        PHONE: req.body.name.phone,
+        BRUNCHDATE: req.body.name.date,
+        REQS: req.body.name.requirements,
+      },
+    });
+    res.json({ success: "Solicitud creada exitosamente!", data });
+  } catch (error) {
+    res.json({ err });
+    console.error;
+  }
 });
 
 app.put("/photos/*", function (req, res) {

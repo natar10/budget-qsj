@@ -4,6 +4,7 @@ import * as menus from "./menus";
 import * as decorations from "./decorations";
 import * as services from "./services";
 import * as receptions from "./receptions";
+import * as individual from "./individual";
 const contentful = require("contentful");
 
 const createClient = (): ContentfulClientApi => {
@@ -13,4 +14,4 @@ const createClient = (): ContentfulClientApi => {
   });
 };
 
-export { createClient, menus, decorations, services, receptions };
+export { createClient, menus, decorations, services, receptions, individual };
