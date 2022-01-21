@@ -140,7 +140,12 @@ const Home: React.FC = () => {
               {errors.phone && <span className="error">{t("required")}</span>}
             </Form.Group>
 
-            <Button type="submit" variant="light" size="lg">
+            <Button
+              disabled={isLoading}
+              type="submit"
+              variant="light"
+              size="lg"
+            >
               {isLoading ? t("loading") : t("quote")}
             </Button>
           </Form>

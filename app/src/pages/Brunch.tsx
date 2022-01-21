@@ -30,13 +30,26 @@ const Home: React.FC<Props> = (props) => {
     <div className="general">
       <h1 className="pt-5 mb-4">{t("qsj")}</h1>
       <h3>{t("brunch.welcome")}</h3>
-      <Container className="main-photo-brunch" fluid>
+      <Container className="main-photo-brunch d-none d-md-block" fluid>
         <img src={content?.fields.mainPhoto.fields.file.url} alt="Brunch" />
+      </Container>
+      <Container
+        className="main-photo-mobile-brunch d-md-none d-block d-md-none"
+        fluid
+      >
+        <img src={content?.fields.mobileImage.fields.file.url} alt="Brunch" />
       </Container>
       <Container className="brunch-info">
         {content ? (
           <>
-            <ReactMarkdown>{content.fields.information}</ReactMarkdown>
+            <ReactMarkdown className="brunch-includes">
+              {content.fields.information}
+            </ReactMarkdown>
+            <a href="#brunch_photos" className="m-2 btn btn-success btn-lg m-2">
+              {t("see_photos")}
+            </a>
+            <hr />
+            <h3>Menu</h3>
             <Row>
               <Col sm={12} md={4}>
                 <ReactMarkdown>{content.fields.varieties}</ReactMarkdown>
@@ -71,9 +84,23 @@ const Home: React.FC<Props> = (props) => {
             <hr />
             <BookBrunch dates={Object.values(content.fields.datesAvailable)} />
             <hr />
+            <br />
+            <br />
+            <div className="costs">
+              <ReactMarkdown>{content.fields.promotion}</ReactMarkdown>
+            </div>
+            <br />
+            <br />
             <div className="contact mb-4">
               <ReactMarkdown>{content.fields.contact}</ReactMarkdown>
             </div>
+
+            <h3 id="brunch_photos" className="mb-5 mt-3">
+              {t("brunch.photos")}
+            </h3>
+            <GooglePhotos albumId={content.fields.photoAlbum} />
+            <br />
+            <br />
             <SocialIcons />
           </>
         ) : (

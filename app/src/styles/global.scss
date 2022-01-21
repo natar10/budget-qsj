@@ -200,6 +200,14 @@ label.form-label {
   }
 }
 
+.main-photo-mobile-brunch {
+  margin: 10px 0 20px;
+
+  img {
+    width: 100%;
+  }
+}
+
 .brunch-info {
   li {
     list-style: none;
@@ -242,6 +250,14 @@ label.form-label {
 .brunch {
   h2 {
     color: white;
+  }
+}
+
+.brunch-includes {
+  li {
+    border-bottom: solid thin rgb(202, 202, 202);
+    padding: 7px 0;
+    font-size: 1.3em;
   }
 }
 

@@ -124,7 +124,6 @@ app.post("/photos/*", function (req, res) {
  ****************************/
 
 app.put("/photos/brunch", async function (req, res) {
-  console.log("*************************** brunch");
   mailchimp.setConfig({
     apiKey: process.env.MAILCHIMP_API,
     server: process.env.MAILCHIMP_SERVER,
@@ -143,11 +142,11 @@ app.put("/photos/brunch", async function (req, res) {
         PHONE: req.body.phone,
         BRUNCHDATE: req.body.date,
         REQS: req.body.requirements,
+        EVENT: "Brunch",
       },
     });
     res.json({ success: "Solicitud creada exitosamente!" });
   } catch (error) {
-    console.log("***************************error", error);
     res.json({ error });
     console.error;
   }

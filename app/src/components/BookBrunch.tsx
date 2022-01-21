@@ -160,7 +160,12 @@ const BookBrunch: React.FC<Props> = ({ dates }: Props) => {
                 />
               </Form.Group>
 
-              <Button type="submit" variant="success" size="lg">
+              <Button
+                disabled={isLoading}
+                type="submit"
+                variant="success"
+                size="lg"
+              >
                 {isLoading ? t("loading") : t("brunch.book")}
               </Button>
             </Form>

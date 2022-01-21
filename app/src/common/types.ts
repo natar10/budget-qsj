@@ -117,7 +117,9 @@ export interface Brunch {
   information: string;
   contact: string;
   mainPhoto: Asset;
+  mobileImage: Asset;
   varieties: string;
+  photoAlbum: string;
   drinks: string;
   milky: string;
   specialties1: string;
