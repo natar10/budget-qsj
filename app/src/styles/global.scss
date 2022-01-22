@@ -164,6 +164,12 @@ label.form-label {
   box-shadow: 8px 9px 12px #000;
 }
 
+.edit-quantity {
+  border: solid 2px #80b96e;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
 span.courtesy {
   box-shadow: none;
   margin: 0 auto 17px;
@@ -290,6 +296,22 @@ span.courtesy {
   margin: 0 auto;
 }
 
+.scroll-top {
+  background-color: white;
+  right: 40px;
+  bottom: 40px;
+  position: fixed;
+  z-index: 2;
+  cursor: pointer;
+  border-radius: 7px;
+  width: 40px;
+  height: 40px;
+  transition: opacity 1s ease-in-out;
+  box-shadow: 0 9px 25px 0 rgb(132 128 177 / 28%);
+  border: none;
+  outline: none;
+}
+
 @media (max-width: 600px) {
   h1 {
     font-size: 5em;
@@ -329,6 +351,11 @@ span.courtesy {
     font-size: 15px;
     border-bottom: solid 2px;
     margin: 0 5px;
+  }
+
+  .scroll-top {
+    right: 21px;
+    bottom: 98px;
   }
 }
 

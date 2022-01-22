@@ -1,9 +1,9 @@
 import React from "react";
 import { useAppContext } from "../context/AppContext";
 import UserDataController from "../components/UserDataController";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Form } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { Props } from "../common/types";
+import { Props, UserData } from "../common/types";
 import { calculateTotal, isFree } from "../common/functions";
 import { Redirect } from "@reach/router";
 import SocialNetworks from "../components/SocialNetworks";
@@ -11,8 +11,20 @@ import { IVA } from "../common/constants";
 
 const Resume: React.FC<Props> = () => {
   const { t } = useTranslation("es");
-  const { userData, selectedUniqueItems, selectedVariousItems, total } =
-    useAppContext();
+  const {
+    setData,
+    userData,
+    selectedUniqueItems,
+    selectedVariousItems,
+    total,
+  } = useAppContext();
+
+  const cantQuantity = Array.from(Array(52).keys());
+  const onSubmit = (quantity: string) => {
+    if (setData && userData) {
+      setData({ ...userData, quantity: +quantity });
+    }
+  };
 
   return (
     <>
@@ -26,6 +38,29 @@ const Resume: React.FC<Props> = () => {
             <p>{t("this_is_resume")}</p>
             <h2>{t("resume")}:</h2>
             <hr />
+            <div className="edit-quantity">
+              <Row>
+                <Col sm={6} md={4}>
+                  <h5>{t("edit_quantity")}:</h5>
+                </Col>
+                <Col sm={6} md={8}>
+                  <Form.Group className="mb-3">
+                    <Form.Select
+                      onChange={(e) => onSubmit(e.target.value)}
+                      name="quantity"
+                      defaultValue={userData.quantity}
+                    >
+                      <option>{t("selector")}</option>
+                      {cantQuantity.slice(3, -1).map((quantity) => (
+                        <option key={quantity} value={quantity * 10}>
+                          {quantity * 10}
+                        </option>
+                      ))}
+                    </Form.Select>
+                  </Form.Group>
+                </Col>
+              </Row>
+            </div>
 
             <Row className="resume_row">
               <Col>

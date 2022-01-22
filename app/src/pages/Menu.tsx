@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ScrollToTop from "react-scroll-to-top";
 import { Props, Menu } from "../common/types";
 import { Link } from "@reach/router";
 import { useAppContext } from "../context/AppContext";
@@ -61,6 +62,7 @@ const Menu: React.FC<Props> = (props) => {
             </Col>
           ))}
         </Row>
+        <ScrollToTop smooth>Tester</ScrollToTop>
       </UserDataController>
     </div>
   );

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import ScrollToTop from "react-scroll-to-top";
 import { useAppContext } from "../context/AppContext";
 import { PropsNode } from "../common/types";
 import GetUserData from "./GetUserData";
@@ -12,22 +13,30 @@ const UserDataController: React.FC<PropsNode> = ({ children }) => {
   const location = useLocation();
   const { t } = useTranslation("es");
   const { userData, total } = useAppContext();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <Container>
       {userData && <MenuBar />}
       {!userData && <h1 className="pt-5 mb-4">{t("qsj")}</h1>}
       {userData ? (
-        <div className="content">
-          {children}{" "}
-          {total !== 0 && location.pathname !== "/resume" && (
-            <div className="total">
-              <h5>{t("have_selected")}:</h5>
-              <Link className="btn btn-lg btn-success" to="/resume">
-                {t("see_resume")}
-              </Link>
-            </div>
-          )}
-        </div>
+        <>
+          <div className="content">
+            {children}{" "}
+            {total !== 0 && location.pathname !== "/resume" && (
+              <div className="total">
+                <h5>{t("have_selected")}:</h5>
+                <Link className="btn btn-lg btn-success" to="/resume">
+                  {t("see_resume")}
+                </Link>
+              </div>
+            )}
+          </div>
+          <ScrollToTop className="scroll-top" smooth top={40} />
+        </>
       ) : (
         <GetUserData />
       )}

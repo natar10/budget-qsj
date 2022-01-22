@@ -53,7 +53,7 @@ const Provider: React.FC = ({ children }) => {
     const uniqueTotal = selectedUniqueItems.reduce(reducer, 0);
     const variousTotal = selectedVariousItems.reduce(reducer, 0);
     setTotal(uniqueTotal + variousTotal);
-  }, [selectedUniqueItems, selectedVariousItems]);
+  }, [selectedUniqueItems, selectedVariousItems, userData?.quantity]);
 
   const context: ContextState = {
     status: loading,
