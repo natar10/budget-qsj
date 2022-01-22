@@ -9,6 +9,7 @@ import { Link, useParams } from "@reach/router";
 import { Button, Col, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import GooglePhotos from "../components/GooglePhotos";
+import { Loading } from "../components/Loading";
 
 type Params = {
   menuId: string;
@@ -44,12 +45,12 @@ const MenuOption: React.FC<Props> = (props) => {
   return (
     <div className={userData ? "general" : "home"}>
       <UserDataController>
-        {isLoading && <h2 className="mt-3">{t("loading")}</h2>}
+        {isLoading && <Loading />}
         {menu && (
           <>
             <h2 className="mb-4">{menu.title}</h2>
             <Row>
-              <Col md={8}>
+              <Col className="includes" sm={12} md={9}>
                 <div>
                   {description?.text &&
                     description?.text2 &&
@@ -71,7 +72,7 @@ const MenuOption: React.FC<Props> = (props) => {
                     )}
                 </div>
               </Col>
-              <Col className="text-center">
+              <Col className="text-center" sm={12} md={3}>
                 <h1>${menu.value}pp</h1>
                 <a
                   href="#menu_options"

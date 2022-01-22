@@ -7,6 +7,7 @@ import { isItemSelected } from "../common/functions";
 import { useTranslation } from "react-i18next";
 import { Col, Row, Button } from "react-bootstrap";
 import { Link } from "@reach/router";
+import { Loading } from "../components/Loading";
 
 const Reception: React.FC<Props> = (props) => {
   const { t } = useTranslation("es");
@@ -43,7 +44,7 @@ const Reception: React.FC<Props> = (props) => {
     <div className={userData ? "general" : "home"}>
       <UserDataController>
         <h1>{t("reception")}</h1>
-        {isLoading && <h2 className="mt-3">{t("loading")}</h2>}
+        {isLoading && <Loading />}
         <Row>
           {allReceptions.map((reception) => (
             <Col

@@ -21,6 +21,8 @@ const DecorationOption: React.FC<Props> = (props) => {
     useAppContext();
   const [decoration, setDecoration] = useState<Decoration | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [needChairs, setNeedChairs] = useState<boolean>(true);
+  const [typeSelected, setTypeSelected] = useState<boolean>(false);
   const { decorationId } = useParams<Params>();
 
   useEffect(() => {
@@ -34,7 +36,15 @@ const DecorationOption: React.FC<Props> = (props) => {
 
   const selectDecoration = (product: Decoration) => {
     if (!selectUniqueItems) return;
-    selectUniqueItems({ type: "decoration", product });
+    selectUniqueItems({
+      type: "ceremony",
+      product: { ...product, addQuantity: needChairs },
+    });
+  };
+
+  const selectType = (chairs: boolean) => {
+    setNeedChairs(chairs);
+    setTypeSelected(true);
   };
 
   return (
@@ -45,32 +55,43 @@ const DecorationOption: React.FC<Props> = (props) => {
           <>
             <h2 className="mb-4">{decoration.title}</h2>
             <Row>
-              <Col md={8}>
-                <h2>{t("included_decoration")}</h2>
-                <Row>
-                  <Col sm={12} md={4} className="decoration">
-                    <ReactMarkdown>{decoration.banquet}</ReactMarkdown>
-                  </Col>
-                  <Col sm={12} md={4} className="decoration">
-                    <ReactMarkdown>{decoration.exterior}</ReactMarkdown>
-                  </Col>
-                  <Col sm={12} md={4} className="decoration">
-                    <ReactMarkdown>{decoration.ceremony}</ReactMarkdown>
-                  </Col>
-                </Row>
+              <Col sm={12} md={4} className="text-left includes">
+                <ReactMarkdown>{decoration.ceremony}</ReactMarkdown>
                 <hr />
                 <ReactMarkdown>{decoration.description}</ReactMarkdown>
-                <hr />
               </Col>
-              <Col className="text-center">
-                <h1>
-                  $
-                  {userData &&
-                    calculateTotal(
-                      { type: "decoration", product: decoration },
-                      +userData.quantity
-                    )}
-                </h1>
+              <Col sm={12} md={5} className="text-center">
+                <h4>{t("ceremony_type")}</h4>
+                <Button
+                  size="lg"
+                  className="m-2"
+                  onClick={() => selectType(false)}
+                >
+                  {t("church")}
+                </Button>
+                <Button
+                  size="lg"
+                  className="m-2"
+                  onClick={() => selectType(true)}
+                >
+                  {t("cascade")}
+                </Button>
+                {typeSelected && (
+                  <h1>
+                    $
+                    {userData &&
+                      calculateTotal(
+                        {
+                          type: "ceremony",
+                          product: decoration,
+                        },
+                        +userData.quantity,
+                        needChairs
+                      )}
+                  </h1>
+                )}
+              </Col>
+              <Col sm={12} md={3} className="text-center">
                 <div className="d-grid gap-2">
                   <a
                     href="#decoration_photos"
@@ -79,28 +100,32 @@ const DecorationOption: React.FC<Props> = (props) => {
                     {t("see_photos")}
                   </a>
                   {!isItemSelected(decoration.id, selectedUniqueItems) ? (
-                    <Button
-                      className="d-block"
-                      onClick={() => selectDecoration(decoration)}
-                      variant="success"
-                      size="lg"
-                    >
-                      {t("select")}
-                    </Button>
+                    <>
+                      {typeSelected && (
+                        <Button
+                          className="d-block"
+                          onClick={() => selectDecoration(decoration)}
+                          variant="success"
+                          size="lg"
+                        >
+                          {t("select")}
+                        </Button>
+                      )}
+                    </>
                   ) : (
                     <h3>{t("selected")}</h3>
                   )}
                   {isItemSelected(decoration.id, selectedUniqueItems) && (
                     <Link
-                      to="/ceremony"
+                      to="/services"
                       className="d-block btn btn-warning btn-lg"
                     >
-                      {t("continue_ceremony")}
+                      {t("continue_services")}
                     </Link>
                   )}
 
                   <Link
-                    to="/decoration"
+                    to="/ceremony"
                     className="d-block btn btn-outline-secondary btn-lg"
                   >
                     {t("more_options")}

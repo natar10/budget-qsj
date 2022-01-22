@@ -3,10 +3,11 @@ import { Props, Service } from "../common/types";
 import { useAppContext } from "../context/AppContext";
 import UserDataController from "../components/UserDataController";
 import { services } from "../services/contentful";
-import { isItemSelected } from "../common/functions";
+import { isItemSelected, isFree } from "../common/functions";
 import { useTranslation } from "react-i18next";
 import { Col, Row, Button } from "react-bootstrap";
 import { Link } from "@reach/router";
+import { Loading } from "../components/Loading";
 
 const Service: React.FC<Props> = (props) => {
   const { t } = useTranslation("es");
@@ -43,7 +44,7 @@ const Service: React.FC<Props> = (props) => {
     <div className={userData ? "general" : "home"}>
       <UserDataController>
         <h1>{t("services")}</h1>
-        {isLoading && <h2 className="mt-3">{t("loading")}</h2>}
+        {isLoading && <Loading />}
         <Row>
           {allServices.map((service) => (
             <Col
@@ -63,6 +64,9 @@ const Service: React.FC<Props> = (props) => {
                 <div className="value">${service.value}</div>
                 {isItemSelected(service.id, selectedVariousItems) && (
                   <h4 className="mt-3">{t("selected")}</h4>
+                )}
+                {isFree(userData, service.title) && (
+                  <h4 className="courtesy">{t("select_courtesy")}</h4>
                 )}
                 <Button
                   variant={

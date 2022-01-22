@@ -1,5 +1,5 @@
-import { SelectedItem, ContentType } from "./types";
-import { DECORATIONS, LOWER_PAX, HIGHER_PAX } from "./constants";
+import { SelectedItem, ContentType, UserData } from "./types";
+import { DECORATIONS, LOWER_PAX, HIGHER_PAX, FREE_ITEMS } from "./constants";
 
 const isItemSelected = (id: string, selectedItems: SelectedItem[]) => {
   return selectedItems.map((item) => item.product.id).includes(id);
@@ -25,12 +25,24 @@ const calculateDecoration = (item: SelectedItem, quantity: number) => {
   return calculatePrice[item.product.id] * quantity;
 };
 
-const calculateTotal = (item: SelectedItem, quantity: number) => {
-  if (item.type !== "decoration") {
-    return item.product.value * quantity;
-  } else {
+const calculateTotal = (
+  item: SelectedItem,
+  quantity: number,
+  chairs: boolean = false
+) => {
+  if (item.type === "decoration") {
     return calculateDecoration(item, quantity);
+  } else if (item.type === "ceremony") {
+    return chairs ? item.product.value + quantity : item.product.value;
   }
+  return item.product.value * quantity;
 };
 
-export { isItemSelected, isCategorySelected, calculateTotal };
+const isFree = (userData: UserData | null, product: string): boolean => {
+  if (userData) {
+    return userData.quantity >= 100 && FREE_ITEMS.includes(product);
+  }
+  return false;
+};
+
+export { isItemSelected, isCategorySelected, calculateTotal, isFree };

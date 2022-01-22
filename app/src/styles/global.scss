@@ -120,6 +120,7 @@ label.form-label {
   left: 0;
   padding: 8px;
   text-align: center;
+  z-index: 999;
 }
 
 .menu-bar h1 {
@@ -141,8 +142,31 @@ label.form-label {
   margin: 0 16px;
 }
 
+.includes {
+  li {
+    text-align: left;
+  }
+}
+
 .services-container {
   padding: 10px;
+
+  h3 {
+    text-transform: capitalize;
+  }
+}
+
+.courtesy {
+  width: 70%;
+  margin: 0 auto 17px;
+  background: #ff0;
+  border: solid 2px #ff0;
+  box-shadow: 8px 9px 12px #000;
+}
+
+span.courtesy {
+  box-shadow: none;
+  margin: 0 auto 17px;
 }
 
 .services {
@@ -177,6 +201,7 @@ label.form-label {
   margin: 10px;
   width: 250px;
   text-align: center;
+  z-index: 99999;
 }
 
 .resume_row {
@@ -261,6 +286,10 @@ label.form-label {
   }
 }
 
+.loader {
+  margin: 0 auto;
+}
+
 @media (max-width: 600px) {
   h1 {
     font-size: 5em;
@@ -291,6 +320,15 @@ label.form-label {
 
   .total h5 {
     display: none;
+  }
+
+  .menu-item {
+    padding: 10px 2px 4px;
+    text-decoration: none;
+    color: #2e2e2e;
+    font-size: 15px;
+    border-bottom: solid 2px;
+    margin: 0 5px;
   }
 }
 

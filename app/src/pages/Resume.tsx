@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useAppContext } from "../context/AppContext";
 import UserDataController from "../components/UserDataController";
 import { Row, Col } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Props } from "../common/types";
-import { calculateTotal } from "../common/functions";
+import { calculateTotal, isFree } from "../common/functions";
 import { Redirect } from "@reach/router";
 import SocialNetworks from "../components/SocialNetworks";
 import { IVA } from "../common/constants";
@@ -13,6 +13,7 @@ const Resume: React.FC<Props> = () => {
   const { t } = useTranslation("es");
   const { userData, selectedUniqueItems, selectedVariousItems, total } =
     useAppContext();
+
   return (
     <>
       {userData ? (
@@ -28,19 +29,19 @@ const Resume: React.FC<Props> = () => {
 
             <Row className="resume_row">
               <Col>
-                <strong>Producto seleccionado</strong>
+                <strong>{t("selected_product")}</strong>
               </Col>
               <Col className="d-none d-md-block">
-                <strong>Categoria</strong>
+                <strong>{t("category")}</strong>
               </Col>
               <Col>
-                <strong>Precio unitario</strong>
+                <strong>{t("unit_price")}</strong>
               </Col>
               <Col>
-                <strong>Cant Invitados</strong>
+                <strong>{t("quantity_assistants")}</strong>
               </Col>
               <Col>
-                <strong>Sub Total</strong>
+                <strong>{t("sub_total")}</strong>
               </Col>
             </Row>
             {selectedUniqueItems.map((item) => (
@@ -48,12 +49,14 @@ const Resume: React.FC<Props> = () => {
                 <Col>{item.product.title}</Col>
                 <Col className="d-none d-md-block">{t(item.type)}</Col>
                 <Col>
-                  {item.type !== "decoration"
+                  {item.type !== "decoration" && item.type !== "ceremony"
                     ? `$${item.product.value}`
                     : t("flat_value")}
                 </Col>
                 <Col>
-                  {item.product.calculate && item.type !== "decoration"
+                  {item.product.calculate &&
+                  item.type !== "decoration" &&
+                  item.type !== "ceremony"
                     ? userData?.quantity
                     : t("flat_value")}
                 </Col>
@@ -61,7 +64,11 @@ const Resume: React.FC<Props> = () => {
                   <strong>
                     $
                     {item.product.calculate
-                      ? calculateTotal(item, +userData.quantity)
+                      ? calculateTotal(
+                          item,
+                          +userData.quantity,
+                          item.product.addQuantity
+                        )
                       : item.product.value}
                   </strong>
                 </Col>
@@ -80,9 +87,15 @@ const Resume: React.FC<Props> = () => {
                 </Col>
                 <Col>
                   $
-                  {item.product.calculate
-                    ? calculateTotal(item, +userData.quantity)
-                    : item.product.value}
+                  {isFree(userData, item.product.title) ? (
+                    <span className="courtesy">0 - {t("courtesy")}!</span>
+                  ) : (
+                    <>
+                      {item.product.calculate
+                        ? calculateTotal(item, +userData.quantity)
+                        : item.product.value}
+                    </>
+                  )}
                 </Col>
               </Row>
             ))}

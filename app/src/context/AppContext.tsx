@@ -6,7 +6,11 @@ import {
   SelectedItem,
   UserData,
 } from "../common/types";
-import { calculateTotal, isCategorySelected } from "../common/functions";
+import {
+  calculateTotal,
+  isCategorySelected,
+  isFree,
+} from "../common/functions";
 import { createClient } from "../services/contentful";
 
 const AppContext = createContext<ContextState>({
@@ -37,10 +41,13 @@ const Provider: React.FC = ({ children }) => {
 
   useEffect(() => {
     const reducer = (acc: number, item: SelectedItem) => {
+      const itemValue = isFree(userData, item.product.title)
+        ? 0
+        : item.product.value;
       const itemTotal =
         item.product.calculate && userData
           ? calculateTotal(item, +userData.quantity)
-          : item.product.value;
+          : itemValue;
       return acc + itemTotal;
     };
     const uniqueTotal = selectedUniqueItems.reduce(reducer, 0);

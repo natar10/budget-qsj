@@ -38,6 +38,8 @@ const CONTENTFUL = {
   brunchMenu: "2HZbbUKa173chiTXyUF27t",
 };
 
+const FREE_ITEMS = ["DJ", "Maestro de ceremonia"];
+
 export {
   CONTENTFUL_CREDENTIALS,
   BRONZE_PRICE,
@@ -49,4 +51,5 @@ export {
   WEDDING_PHOTOS,
   IVA,
   CONTENTFUL,
+  FREE_ITEMS,
 };

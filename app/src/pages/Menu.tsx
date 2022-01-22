@@ -7,6 +7,7 @@ import { menus } from "../services/contentful";
 import { isItemSelected, isCategorySelected } from "../common/functions";
 import { Row, Col } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
+import { Loading } from "../components/Loading";
 
 const Menu: React.FC<Props> = (props) => {
   const { t } = useTranslation("es");
@@ -25,7 +26,7 @@ const Menu: React.FC<Props> = (props) => {
     <div className={userData ? "general" : "home"}>
       <UserDataController>
         <h2>{t("select_menu")}:</h2>
-        {isLoading && <h2 className="mt-3">{t("loading")}</h2>}
+        {isLoading && <Loading />}
         {isCategorySelected("menu", selectedUniqueItems) && (
           <h3>{t("menu_selected")}</h3>
         )}

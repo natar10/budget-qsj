@@ -22,7 +22,12 @@ export interface Props {
   exact?: boolean;
 }
 
-export type ContentType = "menu" | "service" | "decoration" | "reception";
+export type ContentType =
+  | "menu"
+  | "service"
+  | "decoration"
+  | "reception"
+  | "ceremony";
 export interface SelectedItem {
   type: ContentType;
   product: Menu | Decoration | Service | Additional | Reception;
@@ -54,6 +59,7 @@ export interface Menu {
   option2?: string;
   option3?: string;
   calculate: boolean;
+  addQuantity: boolean;
 }
 
 export interface Additional {
@@ -65,6 +71,7 @@ export interface Additional {
   text2?: string;
   text3?: string;
   calculate: boolean;
+  addQuantity: boolean;
 }
 
 export interface Decoration {
@@ -79,6 +86,7 @@ export interface Decoration {
   mainPhoto: Asset;
   additionalPhotos: Asset[];
   calculate: boolean;
+  addQuantity: boolean;
 }
 
 export interface Service {
@@ -90,6 +98,7 @@ export interface Service {
   mainPhoto: Asset;
   additionalPhotos: Asset[];
   calculate: boolean;
+  addQuantity: boolean;
 }
 
 export interface Reception {
@@ -101,6 +110,7 @@ export interface Reception {
   mainPhoto: Asset;
   additionalPhotos: Asset[];
   calculate: boolean;
+  addQuantity: boolean;
 }
 
 export interface GooglePhoto {

@@ -20,6 +20,9 @@ const MenuBar: React.FC = () => {
           <Link className="menu-item" to="/decoration">
             {t("decoration")}
           </Link>
+          <Link className="menu-item" to="/ceremony">
+            {t("ceremony")}
+          </Link>
           <Link className="menu-item" to="/services">
             {t("services")}
           </Link>

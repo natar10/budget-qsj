@@ -11,10 +11,13 @@ import Services from "../pages/Services";
 import Reception from "../pages/Reception";
 import Resume from "../pages/Resume";
 import Brunch from "../pages/Brunch";
+import Ceremony from "../pages/Ceremony";
+import CeremonyOption from "../pages/CeremonyOption";
+import { Loading } from "./Loading";
 
 const App = () => {
   return (
-    <Suspense fallback="loading">
+    <Suspense fallback={<Loading />}>
       <AppContextProvider>
         <Router>
           <Home exact path="/" />
@@ -26,6 +29,8 @@ const App = () => {
           <Reception exact path="/reception" />
           <Resume exact path="/resume" />
           <Brunch exact path="/brunch" />
+          <Ceremony exact path="/ceremony" />
+          <CeremonyOption exact path="ceremony/:decorationId" />
         </Router>
       </AppContextProvider>
     </Suspense>
