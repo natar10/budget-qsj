@@ -9,7 +9,10 @@ import { useTranslation } from "react-i18next";
 import { Link } from "@reach/router";
 import { useLocation } from "@reach/router";
 
-const UserDataController: React.FC<PropsNode> = ({ children }) => {
+const UserDataController: React.FC<PropsNode> = ({
+  children,
+  additionalClass,
+}: PropsNode) => {
   const location = useLocation();
   const { t } = useTranslation("es");
   const { userData, total } = useAppContext();
@@ -19,7 +22,7 @@ const UserDataController: React.FC<PropsNode> = ({ children }) => {
   }, []);
 
   return (
-    <Container>
+    <Container className={`${additionalClass}`}>
       {userData && <MenuBar />}
       {!userData && <h1 className="pt-5 mb-4">{t("qsj")}</h1>}
       {userData ? (

@@ -20,7 +20,8 @@ const App = () => {
     <Suspense fallback={<Loading />}>
       <AppContextProvider>
         <Router>
-          <Home exact path="/" />
+          <Menu exact path="/" />
+          <Home exact path="/home" />
           <Menu exact path="/menu" />
           <MenuOption exact path="/menu/:menuId" />
           <Decoration exact path="decoration" />

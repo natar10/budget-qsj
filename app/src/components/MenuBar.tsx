@@ -9,7 +9,7 @@ const MenuBar: React.FC = () => {
   const { t } = useTranslation("es");
   return (
     <div className="menu-bar">
-      <Link to="/">
+      <Link to="/home">
         <h1>Quinta San Joaquin</h1>
       </Link>
       {location.pathname !== "/" && (

@@ -44,6 +44,7 @@ export interface UserData {
 
 export interface PropsNode {
   children: ReactNode;
+  additionalClass?: string;
 }
 
 export interface Menu {

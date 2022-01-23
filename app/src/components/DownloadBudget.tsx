@@ -13,8 +13,12 @@ export const DownloadBudget = () => {
     if (!input) return;
     html2canvas(input).then((canvas) => {
       const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF();
-      pdf.addImage(imgData, "JPEG", 0, 0, 200, 250);
+      const pdf = new jsPDF({
+        orientation: "p",
+        unit: "mm",
+        format: "a4",
+      });
+      pdf.addImage(imgData, "JPEG", 0, 0, 190, 290);
       pdf.save(`${t("qsj")}-${t("budget")}.pdf`);
     });
   };

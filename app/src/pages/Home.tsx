@@ -21,7 +21,7 @@ const Home: React.FC<Props> = (props) => {
         <hr />
         <h2>{t("start")}</h2>
         <div className="start-buttons">
-          <Link className="btn btn-success btn-xlg" to="menu">
+          <Link className="btn btn-success btn-xlg" to="/menu">
             {t("base_option")}
           </Link>
         </div>

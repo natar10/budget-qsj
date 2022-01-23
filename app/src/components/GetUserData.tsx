@@ -6,6 +6,8 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Row, Col, Form, Button } from "react-bootstrap";
 import { API } from "aws-amplify";
+import GooglePhotos from "./GooglePhotos";
+import { WEDDING_PHOTOS } from "../common/constants";
 import "react-datepicker/dist/react-datepicker.css";
 
 const Home: React.FC = () => {
@@ -32,6 +34,7 @@ const Home: React.FC = () => {
       .catch((e) => console.log("Error:", e));
     if (setData) {
       setData(data);
+      window.scrollTo(0, 0);
     }
   };
 
@@ -151,6 +154,9 @@ const Home: React.FC = () => {
           </Form>
         </Col>
       </Row>
+      <br />
+      <br />
+      <GooglePhotos albumId={WEDDING_PHOTOS} />
     </AppContextProvider>
   );
 };

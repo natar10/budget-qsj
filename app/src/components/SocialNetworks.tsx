@@ -14,6 +14,14 @@ const SocialNetworks: React.FC = () => {
         Haz clic aqui para agendar una Cita en nuestras instalaciones
       </a>
       <hr />
+      <h5>Contactos:</h5>
+      <a
+        href="https://api.whatsapp.com/send?phone=593993927868&text=Por%20farvor%20quisiera%20informacion%20de%20eventos."
+        target="_blank"
+      >
+        <h4>0993 927 868</h4>
+      </a>
+      <hr />
       <SocialIcons />
     </>
   );
