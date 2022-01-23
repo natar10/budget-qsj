@@ -7,6 +7,7 @@ import { Props, UserData } from "../common/types";
 import { calculateTotal, isFree } from "../common/functions";
 import { Redirect } from "@reach/router";
 import SocialNetworks from "../components/SocialNetworks";
+import { DownloadBudget } from "../components/DownloadBudget";
 import { IVA } from "../common/constants";
 
 const Resume: React.FC<Props> = () => {
@@ -143,6 +144,9 @@ const Resume: React.FC<Props> = () => {
               {t("iva_not_included")}: ${(total * IVA).toFixed(2)}
             </p>
             <hr className="mt-4 mb-4" />
+            <DownloadBudget />
+            <br />
+            <hr />
             <SocialNetworks />
           </UserDataController>
         </div>

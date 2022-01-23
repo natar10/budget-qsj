@@ -40,6 +40,8 @@ const CONTENTFUL = {
 
 const FREE_ITEMS = ["DJ", "Maestro de ceremonia"];
 
+const ROOT = "app";
+
 export {
   CONTENTFUL_CREDENTIALS,
   BRONZE_PRICE,
@@ -52,4 +54,5 @@ export {
   IVA,
   CONTENTFUL,
   FREE_ITEMS,
+  ROOT,
 };
