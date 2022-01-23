@@ -60,6 +60,7 @@ export interface Menu {
   option3?: string;
   calculate: boolean;
   addQuantity: boolean;
+  order: number;
 }
 
 export interface Additional {
@@ -72,6 +73,7 @@ export interface Additional {
   text3?: string;
   calculate: boolean;
   addQuantity: boolean;
+  order: number;
 }
 
 export interface Decoration {
@@ -87,6 +89,7 @@ export interface Decoration {
   additionalPhotos: Asset[];
   calculate: boolean;
   addQuantity: boolean;
+  order: number;
 }
 
 export interface Service {
@@ -99,6 +102,7 @@ export interface Service {
   additionalPhotos: Asset[];
   calculate: boolean;
   addQuantity: boolean;
+  order: number;
 }
 
 export interface Reception {
@@ -111,6 +115,7 @@ export interface Reception {
   additionalPhotos: Asset[];
   calculate: boolean;
   addQuantity: boolean;
+  order: number;
 }
 
 export interface GooglePhoto {

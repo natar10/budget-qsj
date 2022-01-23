@@ -1,6 +1,8 @@
 import { Entry, EntryCollection, ContentfulClientApi } from "contentful";
 import { Reception } from "../common/types";
 
+const compare = (a: Reception, b: Reception) => a.order - b.order;
+
 const getReceptions = (client: ContentfulClientApi, type: string) => {
   return client
     .getEntries<Reception>({
@@ -8,9 +10,11 @@ const getReceptions = (client: ContentfulClientApi, type: string) => {
       limit: 20,
     })
     .then((response: EntryCollection<Reception>) => {
-      return response.items.map((item) => {
-        return { ...item.fields, id: item.sys.id };
-      });
+      return response.items
+        .map((item) => {
+          return { ...item.fields, id: item.sys.id };
+        })
+        .sort(compare);
     })
     .catch((err: any) => {
       throw new Error(err.message);

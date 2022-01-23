@@ -1,7 +1,7 @@
 import { Entry, EntryCollection, ContentfulClientApi } from "contentful";
 import { Menu } from "../common/types";
 
-const compare = (a: Menu, b: Menu) => a.value - b.value;
+const compare = (a: Menu, b: Menu) => a.order - b.order;
 
 const getMenus = (client: ContentfulClientApi, type: string) => {
   return client

@@ -1,6 +1,8 @@
 import { Entry, EntryCollection, ContentfulClientApi } from "contentful";
 import { Service } from "../common/types";
 
+const compare = (a: Service, b: Service) => a.order - b.order;
+
 const getServices = (client: ContentfulClientApi, type: string) => {
   return client
     .getEntries<Service>({
@@ -8,9 +10,11 @@ const getServices = (client: ContentfulClientApi, type: string) => {
       limit: 20,
     })
     .then((response: EntryCollection<Service>) => {
-      return response.items.map((item) => {
-        return { ...item.fields, id: item.sys.id };
-      });
+      return response.items
+        .map((item) => {
+          return { ...item.fields, id: item.sys.id };
+        })
+        .sort(compare);
     })
     .catch((err: any) => {
       throw new Error(err.message);

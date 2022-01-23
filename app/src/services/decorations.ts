@@ -1,7 +1,7 @@
 import { Entry, EntryCollection, ContentfulClientApi } from "contentful";
 import { Decoration } from "../common/types";
 
-const compare = (a: Decoration, b: Decoration) => a.value - b.value;
+const compare = (a: Decoration, b: Decoration) => a.order - b.order;
 
 const getDecorations = (client: ContentfulClientApi, type: string) => {
   return client
